@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/GetuiLaboratory/getui-gysdk-ios-cocoapods", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/GetuiLaboratory/getui-gysdk-ios-cocoapods.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -118,7 +118,7 @@ Pod::Spec.new do |s|
   #
 
   # s.framework  = "SomeFramework"
-  s.frameworks = "AdSupportFramework"
+  s.frameworks = "AdSupport"
 
   # s.library   = "iconv"
   s.libraries = "z"
