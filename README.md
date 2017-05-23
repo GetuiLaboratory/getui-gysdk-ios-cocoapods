@@ -4,6 +4,6 @@
 ## podfile 配置
 ``` java
 platform :ios, "7.0"
-pod 'GeYanSdk'
+pod 'GYSDK'
 
 ```
