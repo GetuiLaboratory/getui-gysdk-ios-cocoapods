@@ -24,7 +24,7 @@ typedef void (^GyCallback)(BOOL isSuccess, NSError *error);
 typedef void (^GyVerifyCallback)(BOOL isCloudVerifySuccess, BOOL isSmsSendSuccess, NSError *error);
 
 /**
- *  验证类型
+ *  验证方式
  */
 
 typedef NS_ENUM(NSUInteger, GyVerifyType) {
@@ -51,11 +51,26 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  */
 
 + (void)startWithAppId:(NSString *)aAppId withCallback:(GyCallback)callback;
-
+/**
+ *  云验证接口
+ *
+ *  @param type          验证方式
+ *  @param pnMD5         手机号md5值,32位小写
+ *  @param smsTemplateId 自定义短信模板 id，申请 AppId 时配置
+ *  @param callback      验证接口回调
+ */
 + (void)verifyForType:(GyVerifyType)type withPnMD5:(NSString *)pnMD5 withSmsTemplateId:(NSString *)smsTemplateId withCallback:(GyVerifyCallback)callback;
-
+/**
+ *  短信校验接口
+ *
+ *  @param code     短信验证码
+ *  @param pnMD5    手机号md5值,32位小写
+ *  @param callback 通用接口回调
+ */
 + (void)smsVerifyCode:(NSString *)code withPnMD5:(NSString *)pnMD5 withCallback:(GyCallback)callback;
-
-+ (void)destory;
+/**
+ *  销毁 SDK
+ */
++ (void)destroy;
 
 @end
