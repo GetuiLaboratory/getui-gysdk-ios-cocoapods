@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 /**
- *  通用接口回调
+ *  注册接口回调
  *
  *  @param isSuccess 成功标志位
  *  @param error     错误信息
@@ -17,11 +17,17 @@ typedef void (^GyCallback)(BOOL isSuccess, NSError *error);
 /**
  *  验证接口回调
  *
- *  @param isCloudVerifySuccess 云验证成功标志位
- *  @param isSmsSendSuccess     短信发送成功标志位
- *  @param error                错误信息
+ *  @param verifyDictionary 返回调用结果信息
  */
-typedef void (^GyVerifyCallback)(BOOL isCloudVerifySuccess, BOOL isSmsSendSuccess, NSError *error);
+typedef void (^GyVerifyCallback)(NSDictionary *verifyDictionary);
+
+
+/**
+ *  验证码验证接口回调
+ *
+ *  @param smsVerifyDictionary 短信验证结果信息
+ */
+typedef void (^GySmsVerifyCallback)(NSDictionary *smsVerifyDictionary);
 
 /**
  *  验证方式
@@ -42,14 +48,29 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
     GyVerifyTypeSms,
 };
 
+
 @interface GeYanSdk : NSObject
+
+
+/**
+ 设置debug模式，发布时不要设置，默认关闭
+
+ @param debug 是否打开调试
+ */
++ (void)setDebug:(BOOL)debug;
+
+/**
+ 获取SDK版本号
+
+ @return SDK版本号
+ */
++ (NSString *)getVersion;
 
 /**
  *  初始化个验 SDK
  *
  *  @param aAppId appid
  */
-
 + (void)startWithAppId:(NSString *)aAppId withCallback:(GyCallback)callback;
 /**
  *  云验证接口
@@ -67,7 +88,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param pnMD5    手机号md5值,32位小写
  *  @param callback 通用接口回调
  */
-+ (void)smsVerifyCode:(NSString *)code withPnMD5:(NSString *)pnMD5 withCallback:(GyCallback)callback;
++ (void)smsVerifyCode:(NSString *)code withPnMD5:(NSString *)pnMD5 withCallback:(GySmsVerifyCallback)callback;
 /**
  *  销毁 SDK
  */
