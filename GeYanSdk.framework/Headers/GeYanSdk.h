@@ -17,7 +17,7 @@
  *  @param isSuccess 成功标志位
  *  @param error     错误信息
  */
-typedef void (^GyCallback)(BOOL isSuccess, NSError *error);
+typedef void (^GyCallback)(BOOL isSuccess, NSError *error, NSString *gyUid);
 /**
  *  验证接口回调
  *
@@ -32,6 +32,12 @@ typedef void (^GyVerifyCallback)(NSDictionary *verifyDictionary);
  *  @param smsVerifyDictionary 短信验证结果信息
  */
 typedef void (^GySmsVerifyCallback)(NSDictionary *smsVerifyDictionary);
+
+/**
+ *  准备弹出动画窗口回调，用于智能无感验证失败后，准备弹出动画窗口前的回调处理。
+ *
+ */
+typedef void (^GyReadyAnimationCallback)(void);
 
 
 /**
@@ -111,24 +117,36 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  */
 + (void)checkLogin:(GyCheckModel *)checkModel withCallback:(GyVerifyCallback)callback;
 
+
 /**
  智能无感验证接口
-
+ 
  @param pnMD5 MD5后的手机号码
  @param accountId accountId
  @param businessId 业务Id
  @param callback 通用接口回调
  */
-+ (void)nonSenseCaptchaWithPnMD5:(NSString *)pnMD5 accountId:(NSString *)accountId businessId:(NSString *)businessId withCallback:(GyVerifyCallback)callback;
++ (void)nonSenseCaptcha:(NSString *)pnMD5 accountId:(NSString *)accountId businessId:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView readyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
 
 /**
  动画验证接口
-
+ 
  @param businessId 业务Id
  @param callback 通用接口回调
  */
 
-+ (void)startAnimationCaptchaWithBusinessId:(NSString *)businessId withCallback:(GyVerifyCallback)callback;
++ (void)startAnimationCaptcha:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView isReadyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
+
+
+/**
+ 一键登录接口
+
+ @param controller 当前视图
+ @param smsTemplateId 短信模板，配置该字段则可以使用云验证
+ @param callback 通用接口回调
+ */
++ (void)oneTapLoginController:(UIViewController *)controller smsTemplateId:(NSString *)smsTemplateId withCallback:(GyVerifyCallback)callback;
+
 /**
  *  销毁 SDK
  */
