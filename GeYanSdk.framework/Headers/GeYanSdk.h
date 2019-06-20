@@ -18,12 +18,20 @@
  *  @param error     错误信息
  */
 typedef void (^GyCallback)(BOOL isSuccess, NSError *error, NSString *gyUid);
+
 /**
  *  验证接口回调
  *
  *  @param verifyDictionary 返回调用结果信息
  */
 typedef void (^GyVerifyCallback)(NSDictionary *verifyDictionary);
+
+/**
+ *  验证界面点击回调
+ *
+ *  @param verifyDictionary 返回调用结果信息
+ */
+typedef void (^GyClickHandler)(NSInteger senderTag);
 
 
 /**
@@ -48,15 +56,15 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
     /**
      *  Cloud + Sms 验证
      */
-    GyVerifyTypeCloudSms,
+            GyVerifyTypeCloudSms,
     /**
      *  Cloud 验证
      */
-    GyVerifyTypeCloud,
+            GyVerifyTypeCloud,
     /**
      *  Sms 验证
      */
-    GyVerifyTypeSms,
+            GyVerifyTypeSms,
 };
 
 
@@ -83,6 +91,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param aAppId appid
  */
 + (void)startWithAppId:(NSString *)aAppId withCallback:(GyCallback)callback;
+
 /**
  *  云验证接口
  *
@@ -92,6 +101,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param callback      验证接口回调
  */
 + (void)verifyForType:(GyVerifyType)type withPnMD5:(NSString *)pnMD5 withSmsTemplateId:(NSString *)smsTemplateId withCallback:(GyVerifyCallback)callback;
+
 /**
  *  短信校验接口
  *
@@ -119,33 +129,58 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 
 
 /**
- 智能无感验证接口
- 
- @param pnMD5 MD5后的手机号码
- @param accountId accountId
- @param businessId 业务Id
- @param callback 通用接口回调
+ * 智能无感验证接口
+ * @param pnMD5 MD5后的手机号码
+ * @param accountId accountId
+ * @param businessId 业务businessId
+ * @param showLoadingView 是否显示动画
+ * @param readyAnimationCallback 动画回调
+ * @param callback 通用接口回调
  */
 + (void)nonSenseCaptcha:(NSString *)pnMD5 accountId:(NSString *)accountId businessId:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView readyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
 
 /**
- 动画验证接口
- 
- @param businessId 业务Id
- @param callback 通用接口回调
+ * 动画验证接口
+ * @param businessId 业务ID
+ * @param showLoadingView 是否显示动画
+ * @param readyAnimationCallback 动画回调
+ * @param callback 通用接口回调
  */
-
 + (void)startAnimationCaptcha:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView isReadyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
 
 
 /**
  一键登录接口
 
- @param controller 当前视图
- @param smsTemplateId 短信模板，配置该字段则可以使用云验证
+ @param clickHandler 点击事件回调
  @param callback 通用接口回调
  */
-+ (void)oneTapLoginController:(UIViewController *)controller smsTemplateId:(NSString *)smsTemplateId withCallback:(GyVerifyCallback)callback;
++ (void)oneTapLogin:(GyClickHandler)clickHandler andCallback:(GyVerifyCallback)callback;
+
+/**
+ * 本机号码校验
+ * @param pn 手机号码
+ * @param token token
+ * @param callback 回调
+ */
++ (void)checkPhoneNumber:(NSString *)pn withToken:(NSString *)token useCloudVerify:(BOOL)useCloudVerify andCallback:(GyVerifyCallback)callback;
+
+/**
+ * 检查当前环境是否可以使用一键登录方法
+ * @param callback 结果回调
+ */
++ (void)checkELoginEnable:(GyVerifyCallback)callback;
+
+/**
+ * 获取token
+ * @param callback 结果回调
+ */
++ (void)getVerifyTokenWithCallback:(GyVerifyCallback)callback;
+
+/**
+ * 关闭登录界面
+ */
++ (void)closeAuthVC;
 
 /**
  *  销毁 SDK
