@@ -29,7 +29,7 @@ typedef void (^GyVerifyCallback)(NSDictionary *verifyDictionary);
 /**
  *  验证界面点击回调
  *
- *  @param verifyDictionary 返回调用结果信息
+ *  @param senderTag 点击回调
  */
 typedef void (^GyClickHandler)(NSInteger senderTag);
 
