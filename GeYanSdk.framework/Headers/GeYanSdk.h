@@ -7,6 +7,7 @@
 //
 
 #import "GyCheckModel.h"
+#import "GyAuthViewModel.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -25,13 +26,6 @@ typedef void (^GyCallback)(BOOL isSuccess, NSError *error, NSString *gyUid);
  *  @param verifyDictionary 返回调用结果信息
  */
 typedef void (^GyVerifyCallback)(NSDictionary *verifyDictionary);
-
-/**
- *  验证界面点击回调
- *
- *  @param senderTag 点击回调
- */
-typedef void (^GyClickHandler)(NSInteger senderTag);
 
 
 /**
@@ -148,34 +142,60 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  */
 + (void)startAnimationCaptcha:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView isReadyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
 
+#pragma mark 一键登录/手机号码校验 相关
+
++ (void)setEloginTimeout:(NSTimeInterval)timeout;
 
 /**
- 一键登录接口
-
- @param clickHandler 点击事件回调
- @param callback 通用接口回调
+ * 预登陆,若成功,则可以调用一键登录接口,打开登录页面
+ * @param callback 通用接口回调
+ *  {
+ *  code = 30000; // NSNumber, 非30000为失败的状态码
+ *  processID = 47dab9b7c26629cd9bc117f88e2f9233; // NSString, 流水号
+ *  operatorType = CT; // NSString, 运营商类型(CM/CU/CT)
+ *  errorCode = "-30003", // NSString, 运营商返回的错误码
+ *  msg = "\U83b7\U53d6accessCode\U6210\U529f"; // NSString, 运营商返回的描述消息
+ *  metadata = {}; // NSDictionary, 失败时, 运营商的响应内容。
+ *  }
  */
-+ (void)oneTapLogin:(GyClickHandler)clickHandler andCallback:(GyVerifyCallback)callback;
++ (void)preGetToken:(GyVerifyCallback)callback;
+
+/**
+ * 一键登录
+ * @param controller 当前viewController
+ * @param model GYAuthViewModel
+ * @param callback 通用接口回调
+ *  {
+ *  code = 30000; // NSNumber, 非30000为失败的状态码
+ *  processID = 47dab9b7c26629cd9bc117f88e2f9233; // NSString, 流水号
+ *  operatorType = CT; // NSString, 运营商类型(CM/CU/CT)
+ *  errorCode = "-30003", // NSString, 运营商返回的错误码
+ *  msg = "\U83b7\U53d6accessCode\U6210\U529f"; // NSString, 运营商返回的描述消息
+ *  metadata = {}; // NSDictionary, 失败时, 运营商的响应内容。
+ *  }
+ */
++ (void)oneTapLogin:(UIViewController *)controller withViewModel:(GyAuthViewModel *)model andCallback:(GyVerifyCallback)callback;
 
 /**
  * 本机号码校验
  * @param pn 手机号码
- * @param token token
  * @param callback 回调
  */
-+ (void)checkPhoneNumber:(NSString *)pn withToken:(NSString *)token useCloudVerify:(BOOL)useCloudVerify andCallback:(GyVerifyCallback)callback;
++ (void)checkPhoneNumber:(NSString *)pn andCallback:(GyVerifyCallback)callback;
 
 /**
- * 检查当前环境是否可以使用一键登录方法
+ * 当前网络环境
+ * 根据返回结果判断是否适合使用一键登录方法(数据网络必须打开,如下所示,需要满足network==1 || network==3)
+ * carrier: 运营商： 0.未知 / 1.中国移动 / 2.中国联通 / 3.中国电信
+ * network: 网络类型： 0.无网络/ 1.数据流量 / 2.wifi / 3.数据+wifi
+ * network即使返回非0, 也可能因为终端用户未授权,数据网络网络权限而无法访问设备的移动蜂窝数据网络
+ * {
+ *  carrier: 0/1/2/3
+ *  network: 0/1/2/3
+ * }
  * @param callback 结果回调
  */
-+ (void)checkELoginEnable:(GyVerifyCallback)callback;
-
-/**
- * 获取token
- * @param callback 结果回调
- */
-+ (void)getVerifyTokenWithCallback:(GyVerifyCallback)callback;
++ (NSMutableDictionary *)currentNetworkInfo;
 
 /**
  * 关闭登录界面
