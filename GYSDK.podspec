@@ -121,7 +121,7 @@ Pod::Spec.new do |s|
   s.frameworks = "AdSupport"
 
   # s.library   = "iconv"
-  s.libraries = 'z','sqlite3.0'
+  s.libraries = 'z','c++'
 
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -131,6 +131,7 @@ Pod::Spec.new do |s|
   #  you can include multiple dependencies to ensure it works.
 
   s.requires_arc = true
+  s.static_framework = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
