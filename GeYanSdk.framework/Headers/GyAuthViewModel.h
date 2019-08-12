@@ -11,7 +11,97 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * @abstract 授权登录页面自定义视图，customAreaView为授权页面的view，如，可将三方登录添加到授权登录页面
+ */
 typedef void(^GYCustomUIHandler)(UIView *customAreaView);
+
+/**
+ * @abstract 1、若授权页面只支持竖屏，只设置竖屏方向偏移；
+             2、若授权页面只支持横屏，只设置横屏方向偏移；
+             3、若授权页面支持旋转自动切换横竖屏，则同时设置竖屏方向和横屏方向偏移
+             4、弹窗模式，同以上1、2、3
+             5、size默认都可以不用设置，会根据字体大小自适应
+             6、x轴方向偏移量有两个值可以设置，portraitCenterXOffset为控件的x轴中点到弹窗x轴中点的距离，portraitLeftXOffset为控件的左边缘到屏幕左边缘的距离，两者选其一即可
+ */
+typedef struct OLRect {
+    /**
+     竖屏时
+     导航栏隐藏时，为控件顶部到状态栏的距离；导航栏显示时，为控件顶部到导航栏底部的距离
+     弹窗时
+     为控件顶部到弹窗顶部的距离
+     */
+    CGFloat portraitTopYOffset;
+
+    /**
+     竖屏时
+     控件的x轴中点到屏幕x轴中点的距离，默认为0
+     弹窗时
+     控件的x轴中点到弹窗x轴中点的距离，默认为0
+     */
+    CGFloat portraitCenterXOffset;
+
+    /**
+     竖屏时
+     控件的左边缘到屏幕左边缘的距离，默认为0
+     弹窗时
+     控件的左边缘到屏幕左边缘的距离，默认为0
+
+     portraitLeftXOffset与portraitCenterXOffset设置一个即可，portraitLeftXOffset优先级大于portraitCenterXOffset，
+     设置此属性时，portraitCenterXOffset属性失效
+     */
+    CGFloat portraitLeftXOffset;
+
+    /**
+     横屏时
+     导航栏隐藏时，为控件顶部到屏幕顶部的距离；导航栏显示时，为控件顶部到导航栏底部的距离
+     弹窗时
+     为控件顶部到弹窗顶部的距离
+     */
+    CGFloat landscapeTopYOffset;
+
+    /**
+     横屏时
+     控件的x轴中点到屏幕x轴中点的距离，默认为0
+     弹窗时
+     控件的x轴中点到弹窗x轴中点的距离，默认为0
+     */
+    CGFloat landscapeCenterXOffset;
+
+    /**
+     横屏时
+     控件的左边缘到屏幕左边缘的距离，默认为0
+     弹窗时
+     控件的左边缘到屏幕左边缘的距离，默认为0
+
+     landscapeLeftXOffset与landscapeCenterXOffset设置一个即可，landscapeLeftXOffset优先级大于landscapeCenterXOffset，
+     设置此属性时，landscapeCenterXOffset属性失效
+     */
+    CGFloat landscapeLeftXOffset;
+
+    /**
+     控件大小，只有宽度、高度同时大于0，设置的size才会生效，否则为控件默认的size
+     */
+    CGSize size;
+} OLRect;
+
+/**
+ * @abstract 弹窗模式时支持的动画类型
+ */
+typedef NS_ENUM(NSInteger, OLAuthPopupAnimationStyle) {
+    OLAuthPopupAnimationStyleCoverVertical = 0,
+    OLAuthPopupAnimationStyleFlipHorizontal,
+    OLAuthPopupAnimationStyleCrossDissolve,
+    OLAuthPopupAnimationStyleCustom
+};
+
+/**
+ * 授权页自定义Loading，会在点击登录按钮之后触发
+ * containerView为loading的全屏蒙版view
+ * 请自行在containerView添加自定义loading
+ * 设置block后，默认loading将无效
+ */
+typedef void(^OLLoadingViewBlock)(UIView *containerView);
 
 @interface GyAuthViewModel : NSObject
 
@@ -35,7 +125,7 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nullable, nonatomic, strong) UIColor *naviBgColor;
 
 /**
- 授权页导航左边的返回按钮的图片。默认黑色系统样式返回图片。尺寸会被约束为22x22。
+ 授权页导航左边的返回按钮的图片。默认黑色系统样式返回图片。
  */
 @property(nullable, nonatomic, strong) UIImage *naviBackImage;
 
@@ -49,6 +139,16 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
  */
 @property(nonatomic, assign) BOOL naviHidden;
 
+/**
+ 返回按钮位置及大小，返回按钮最大size为CGSizeMake(40, 40)。
+ */
+@property(nonatomic, assign) OLRect backButtonRect;
+
+/**
+ 返回按钮隐藏。默认不隐藏。
+ */
+@property(nonatomic, assign) BOOL backButtonHidden;
+
 #pragma mark - Logo/图标
 
 /**
@@ -57,13 +157,9 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nullable, nonatomic, strong) UIImage *appLogo;
 
 /**
- Logo 视图竖直方向偏移。
-
- @discussion
- 如果导航栏没有隐藏, 偏移距离等于该视图顶部到导航底部的距离。
- 如果导航栏隐藏, 偏移距离等于该视图顶部到状态栏之间的距离。
+ Logo 位置及大小。
  */
-@property(nonatomic, assign) CGFloat logoOffsetY;
+@property(nonatomic, assign) OLRect logoRect;
 
 /**
  Logo 图片隐藏。默认不隐藏。
@@ -78,20 +174,21 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nullable, nonatomic, strong) UIColor *phoneNumColor;
 
 /**
- 号码预览文字的大小。默认24pt。
+ 号码预览文字的字体。默认粗体，24pt。
  */
-@property(nonatomic, assign) CGFloat phoneNumSize;
+@property(nullable, nonatomic, strong) UIFont *phoneNumFont;
 
 /**
- 号码预览竖直方向偏移。
-
- @discussion
- 如果导航栏没有隐藏, 偏移距离等于该视图顶部到导航底部的距离。
- 如果导航栏隐藏, 偏移距离等于该视图顶部到状态栏之间的距离。
+ 号码预览 位置及大小，电话号码不支持设置大小，大小根据电话号码文字自适应
  */
-@property(nonatomic, assign) CGFloat phoneNumLabelOffsetY;
+@property(nonatomic, assign) OLRect phoneNumRect;
 
 #pragma mark - Switch Button/切换按钮
+
+/**
+ 授权页切换账号按钮的文案。默认为“切换账号”。
+ */
+@property(nullable, nonatomic, copy) NSString *switchButtonText;
 
 /**
  授权页切换账号按钮的颜色。默认蓝色。
@@ -99,13 +196,14 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nullable, nonatomic, strong) UIColor *switchButtonColor;
 
 /**
- 授权页切换账号按钮竖直方向偏移。
-
- @discussion
- 如果导航栏没有隐藏, 偏移距离等于该视图顶部到导航底部的距离。
- 如果导航栏隐藏, 偏移距离等于该视图顶部到状态栏之间的距离。
+ 授权页切换账号的字体。默认字体，15pt。
  */
-@property(nonatomic, assign) CGFloat switchButtonOffsetY;
+@property(nullable, nonatomic, strong) UIFont *switchButtonFont;
+
+/**
+ 授权页切换账号按钮 位置及大小。
+ */
+@property(nonatomic, assign) OLRect switchButtonRect;
 
 /**
  隐藏切换账号按钮。默认不隐藏。
@@ -125,28 +223,26 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nullable, nonatomic, strong) NSAttributedString *authButtonTitle;
 
 /**
- 授权按钮竖直方向偏移。
-
- @discussion
- 偏移距离等于该视图顶部到导航底部的距离。
+ 授权按钮 位置及大小。
  */
-@property(nonatomic, assign) CGFloat authButtonOffsetY;
+@property(nonatomic, assign) OLRect authButtonRect;
 
 #pragma mark - Slogan/口号标语
 
 /**
- Slogan竖直方向偏移。
-
- @discussion
- 如果导航栏没有隐藏, 偏移距离等于该视图顶部到导航底部的距离。
- 如果导航栏隐藏, 偏移距离等于该视图顶部到状态栏之间的距离。
+ Slogan 位置及大小。
  */
-@property(nonatomic, assign) CGFloat sloganOffsetY;
+@property(nonatomic, assign) OLRect sloganRect;
 
 /**
- Slogan 文字颜色。默认灰色, 12pt。
+ Slogan 文字颜色。默认灰色。
  */
 @property(nonatomic, strong) UIColor *sloganTextColor;
+
+/**
+ Slogan字体。默认字体, 12pt。
+ */
+@property(nonatomic, strong) UIFont *sloganTextFont;
 
 #pragma mark - CheckBox & Privacy Terms/隐私条款勾选框及隐私条款
 
@@ -156,14 +252,19 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nonatomic, assign) BOOL defaultCheckBoxState;
 
 /**
- 授权页面上勾选框勾选的图标。默认为蓝色图标。最大尺寸32x32, 推荐18x18。
+ 授权页面上勾选框勾选的图标。默认为蓝色图标。推荐尺寸为12x12。
  */
 @property(nullable, nonatomic, strong) UIImage *checkedImage;
 
 /**
- 授权页面上勾选框未勾选的图标。默认为白色图标。最大尺寸32x32, 推荐18x18。
+ 授权页面上勾选框未勾选的图标。默认为白色图标。推荐尺寸为12x12。
  */
 @property(nullable, nonatomic, strong) UIImage *uncheckedImage;
+
+/**
+ 授权页面上条款勾选框大小。
+ */
+@property(nonatomic, assign) CGSize checkBoxSize;
 
 /**
  隐私条款文字属性。默认基础文字灰色, 条款蓝色高亮, 12pt。
@@ -181,12 +282,9 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 @property(nullable, nonatomic, strong) UIColor *termTextColor;
 
 /**
- 隐私条款竖直方向偏移。
-
- @discussion
- 偏移距离等于该视图底部到屏幕底部(视图控制器)底部的距离。
+ 隐私条款 位置及大小，隐私条款，宽需大于50，高需大于20，才会生效。
  */
-@property(nonatomic, assign) CGFloat termsOffsetY;
+@property(nonatomic, assign) OLRect termsRect;
 
 #pragma mark - Custom Area/自定义区域
 
@@ -195,8 +293,8 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
 
  @discussion
  提供的视图容器使用NSLayoutConstraint与相关的视图进行布局约束。
- 如果导航栏没有隐藏, 顶部与导航栏底部对齐, 左边与屏幕对齐, 右边与屏幕对齐, 底部与屏幕对齐。
- 如果导航栏隐藏, 顶部与状态栏底部对齐, 左边与屏幕对齐, 右边与屏幕对齐, 底部与屏幕对齐。
+ 如果导航栏没有隐藏, 顶部与导航栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
+ 如果导航栏隐藏, 顶部与状态栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
  */
 @property(nullable, nonatomic, copy) GYCustomUIHandler customUIHandler;
 
@@ -206,6 +304,87 @@ typedef void(^GYCustomUIHandler)(UIView *customAreaView);
  授权页面背景图片
  */
 @property(nullable, nonatomic, strong) UIImage *backgroundImage;
+
+
+/**
+ 横屏模式授权页面背景图片
+ */
+@property(nullable, nonatomic, strong) UIImage *landscapeBackgroundImage;
+
+#pragma mark - orientationMask
+
+/**
+ * 授权页面支持的横竖屏方向
+ */
+@property(nonatomic, assign) UIInterfaceOrientationMask supportedInterfaceOrientations;
+
+
+#pragma mark - Popup
+
+/**
+ * 是否为弹窗模式
+ */
+@property(nonatomic, assign) BOOL isPopup;
+
+/**
+ 弹窗 位置及大小。弹窗模式时，x轴偏移只支持portraitLeftXOffset和landscapeLeftXOffset。
+ */
+@property(nonatomic, assign) OLRect popupRect;
+
+/**
+ 弹窗圆角，默认为6。
+ */
+@property(nonatomic, assign) CGFloat popupCornerRadius;
+
+/**
+ * 弹窗动画类型，当popupAnimationStyle为OLAuthPopupAnimationStyleStyleCustom时，动画为用户自定义，用户需要传一个CATransition对象来设置动画
+ */
+@property(nonatomic, assign) OLAuthPopupAnimationStyle popupAnimationStyle;
+
+/**
+ * 弹窗自定义动画
+ */
+@property(nonatomic, strong) CATransition *popupTransitionAnimation;
+
+/**
+ * 弹窗关闭按钮图片，弹窗关闭按钮的尺寸跟图片尺寸保持一致。
+ * 弹窗关闭按钮位于弹窗右上角，目前只支持设置其距顶部偏移和距右边偏移。
+ */
+@property(nullable, nonatomic, strong) UIImage *closePopupImage;
+
+/**
+ * 弹窗关闭按钮距弹窗顶部偏移。
+ */
+@property(nonatomic, strong) NSNumber *closePopupTopOffset;
+
+/**
+ * 弹窗关闭按钮距弹窗右边偏移。
+ */
+@property(nonatomic, strong) NSNumber *closePopupRightOffset;
+
+#pragma mark - Loading
+
+/**
+ * 授权页面，点击登录按钮之后的回调
+ */
+@property(nonatomic, copy, nullable) OLLoadingViewBlock loadingViewBlock;
+
+#pragma mark - WebViewController Navigation/服务条款页面导航栏
+
+/**
+ * 服务条款页面导航栏隐藏。默认不隐藏。
+ */
+@property(nonatomic, assign) BOOL webNaviHidden;
+
+/**
+ * 服务条款页面导航的标题。默认为"服务条款"，粗体、17pt。
+ */
+@property(nullable, nonatomic, strong) NSAttributedString *webNaviTitle;
+
+/**
+ * 服务条款页面导航的背景颜色。默认白色。
+ */
+@property(nullable, nonatomic, strong) UIColor *webNaviBgColor;
 
 @end
 

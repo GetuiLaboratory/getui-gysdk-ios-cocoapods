@@ -157,6 +157,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  msg = "\U83b7\U53d6accessCode\U6210\U529f"; // NSString, 运营商返回的描述消息
  *  metadata = {}; // NSDictionary, 失败时, 运营商的响应内容。
  *  }
+ *  其中中国移动有效期为 1 小时,中国联通和中国电信为 10 分钟。
  */
 + (void)preGetToken:(GyVerifyCallback)callback;
 
@@ -173,6 +174,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  msg = "\U83b7\U53d6accessCode\U6210\U529f"; // NSString, 运营商返回的描述消息
  *  metadata = {}; // NSDictionary, 失败时, 运营商的响应内容。
  *  }
+ *  token 有效期:中国移动的有效期为 2 分钟，中国联通的为 30 分钟，中国电信的为 30 天。
  */
 + (void)oneTapLogin:(UIViewController *)controller withViewModel:(GyAuthViewModel *)model andCallback:(GyVerifyCallback)callback;
 
@@ -199,8 +201,9 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 
 /**
  * 关闭登录界面
+ * 请不要使用其他方式关闭授权页面, 否则可能导致 OneLogin 无法再次调起
  */
-+ (void)closeAuthVC;
++ (void)closeAuthVC:(void (^ __nullable)(void))completion;
 
 /**
  *  销毁 SDK
