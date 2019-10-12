@@ -103,6 +103,34 @@ typedef NS_ENUM(NSInteger, OLAuthPopupAnimationStyle) {
  */
 typedef void(^OLLoadingViewBlock)(UIView *containerView);
 
+/**
+ * 停止授权页自定义Loading，会在调用[GetanSDK stopLoading]时触发
+ * containerView为loading的全屏蒙版view
+ */
+typedef void(^OLStopLoadingViewBlock)(UIView *containerView);
+
+/**
+ * 授权页面视图生命周期回调
+ * @param viewLifeCycle 值为viewDidLoad、viewWillAppear、viewWillDisappear、viewDidAppear、viewDidDisappear
+ * @param animated 是否有动画
+ */
+typedef void(^OLAuthViewLifeCycleBlock)(NSString *viewLifeCycle, BOOL animated);
+
+/**
+ * 点击授权页面授权按钮的回调
+ */
+typedef void(^OLClickAuthButtonBlock)(void);
+
+/**
+ * 点击授权页面隐私协议前勾选框的回调
+ */
+typedef void(^OLClickCheckboxBlock)(BOOL isChecked);
+
+/**
+ * 点击授权页面弹窗背景的回调
+ */
+typedef void(^OLTapAuthBackgroundBlock)(void);
+
 @interface GyAuthViewModel : NSObject
 
 #pragma mark - Status Bar/状态栏
@@ -152,7 +180,7 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
 #pragma mark - Logo/图标
 
 /**
- 授权页面上展示的图标。默认为 "OneLogin" 图标。
+ 授权页面上展示的图标。默认为 "applogo" 图标。
  */
 @property(nullable, nonatomic, strong) UIImage *appLogo;
 
@@ -165,6 +193,11 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
  Logo 图片隐藏。默认不隐藏。
  */
 @property(nonatomic, assign) BOOL logoHidden;
+
+/**
+ logo圆角，默认为0。
+ */
+@property(nonatomic, assign) CGFloat logoCornerRadius;
 
 #pragma mark - Phone Number Preview/手机号预览
 
@@ -227,6 +260,16 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
  */
 @property(nonatomic, assign) OLRect authButtonRect;
 
+/**
+ 授权按钮圆角，默认为0。
+ */
+@property(nonatomic, assign) CGFloat authButtonCornerRadius;
+
+/**
+ * 点击授权页面授权按钮的回调
+ */
+@property(nullable, nonatomic, copy) OLClickAuthButtonBlock clickAuthButtonBlock;
+
 #pragma mark - Slogan/口号标语
 
 /**
@@ -286,11 +329,27 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
  */
 @property(nonatomic, assign) OLRect termsRect;
 
+/**
+ 除隐私条款外的其他文案，数组大小必须为4，元素依次为：条款前的文案、条款一和条款二连接符、条款二和条款三连接符，条款后的文案。
+ 默认为@[@"登录即同意", @"和", @"、", @"并使用本机号码登录"]
+ */
+@property(nullable, nonatomic, copy) NSArray<NSString *> *auxiliaryPrivacyWords;
+
+/**
+ * 点击授权页面隐私协议前勾选框的回调
+ */
+@property(nullable, nonatomic, copy) OLClickCheckboxBlock clickCheckboxBlock;
+
+/**
+* 服务条款文案对齐方式，默认为NSTextAlignmentLeft
+*/
+@property (nonatomic, assign) NSTextAlignment termsAlignment;
+
 #pragma mark - Custom Area/自定义区域
 
 /**
  自定义区域视图的处理block
-
+ 
  @discussion
  提供的视图容器使用NSLayoutConstraint与相关的视图进行布局约束。
  如果导航栏没有隐藏, 顶部与导航栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
@@ -299,6 +358,11 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
 @property(nullable, nonatomic, copy) GYCustomUIHandler customUIHandler;
 
 #pragma mark - Background Image/授权页面背景图片
+
+/**
+ 授权页背景颜色。默认白色。
+ */
+@property(nullable, nonatomic, strong) UIColor *backgroundColor;
 
 /**
  授权页面背景图片
@@ -347,44 +411,90 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
 @property(nonatomic, strong) CATransition *popupTransitionAnimation;
 
 /**
- * 弹窗关闭按钮图片，弹窗关闭按钮的尺寸跟图片尺寸保持一致。
- * 弹窗关闭按钮位于弹窗右上角，目前只支持设置其距顶部偏移和距右边偏移。
+ 弹窗关闭按钮图片，弹窗关闭按钮的尺寸跟图片尺寸保持一致。
+ 弹窗关闭按钮位于弹窗右上角，目前只支持设置其距顶部偏移和距右边偏移。
  */
 @property(nullable, nonatomic, strong) UIImage *closePopupImage;
 
 /**
- * 弹窗关闭按钮距弹窗顶部偏移。
+ 弹窗关闭按钮距弹窗顶部偏移。
  */
 @property(nonatomic, strong) NSNumber *closePopupTopOffset;
 
 /**
- * 弹窗关闭按钮距弹窗右边偏移。
+ 弹窗关闭按钮距弹窗右边偏移。
  */
 @property(nonatomic, strong) NSNumber *closePopupRightOffset;
+
+/**
+是否需要通过点击弹窗的背景区域以关闭授权页面。
+*/
+@property (nonatomic, assign) BOOL canClosePopupFromTapGesture;
+
+/**
+* 点击授权页面弹窗背景的回调
+*/
+@property (nonatomic, copy) OLTapAuthBackgroundBlock tapAuthBackgroundBlock;
 
 #pragma mark - Loading
 
 /**
- * 授权页面，点击登录按钮之后的回调
+ * 授权页面，自定义加载进度条，点击登录按钮之后的回调
  */
 @property(nonatomic, copy, nullable) OLLoadingViewBlock loadingViewBlock;
+
+/**
+ * 授权页面，停止自定义加载进度条，调用[GetanSDK stopLoading]之后的回调
+ */
+@property(nonatomic, copy, nullable) OLStopLoadingViewBlock stopLoadingViewBlock;
 
 #pragma mark - WebViewController Navigation/服务条款页面导航栏
 
 /**
- * 服务条款页面导航栏隐藏。默认不隐藏。
+ 服务条款页面导航栏隐藏。默认不隐藏。
  */
 @property(nonatomic, assign) BOOL webNaviHidden;
 
 /**
- * 服务条款页面导航的标题。默认为"服务条款"，粗体、17pt。
+ 服务条款页面导航的标题。默认为"服务条款"，粗体、17pt。
  */
 @property(nullable, nonatomic, strong) NSAttributedString *webNaviTitle;
 
 /**
- * 服务条款页面导航的背景颜色。默认白色。
+ 服务条款页面导航的背景颜色。默认白色。
  */
 @property(nullable, nonatomic, strong) UIColor *webNaviBgColor;
+
+#pragma mark - Hint
+
+/**
+ 未勾选服务条款复选框时，点击登录按钮的提示。默认为"请同意服务条款"。
+ */
+@property(nullable, nonatomic, copy) NSString *notCheckProtocolHint;
+
+#pragma mark - OLAuthViewLifeCycleBlock
+
+/**
+ 授权页面视图生命周期回调。
+ */
+@property(nullable, nonatomic, copy) OLAuthViewLifeCycleBlock viewLifeCycleBlock;
+
+#pragma mark - UIModalPresentationStyle
+
+/**
+ present授权页面时的样式，默认为UIModalPresentationFullScreen
+ */
+@property(nonatomic, assign) UIModalPresentationStyle modalPresentationStyle;
+
+/**
+ * present授权页面时的自定义动画
+ */
+@property (nonatomic, strong) CAAnimation *modalPresentationAnimation;
+
+/**
+ * dismiss授权页面时的自定义动画
+ */
+@property (nonatomic, strong) CAAnimation *modalDismissAnimation;
 
 @end
 
