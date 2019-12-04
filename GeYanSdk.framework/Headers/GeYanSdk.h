@@ -103,7 +103,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param pnMD5    手机号md5值,32位小写
  *  @param callback 通用接口回调
  */
-+ (void)smsVerifyCode:(NSString *)code withPnMD5:(NSString *)pnMD5 withCallback:(GySmsVerifyCallback)callback;
++ (void)smsVerifyCode:(NSString *_Nonnull)code withPnMD5:(NSString *_Nonnull)pnMD5 withCallback:(GySmsVerifyCallback _Nonnull)callback;
 
 /**
  注册保护接口
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  @param checkModel 校验模型
  @param callback 通用接口回调
  */
-+ (void)checkRegister:(GyCheckModel *)checkModel withCallback:(GyVerifyCallback)callback;
++ (void)checkRegister:(GyCheckModel *_Nonnull)checkModel withCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
  登录保护接口
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  @param checkModel 校验模型
  @param callback 通用接口回调
  */
-+ (void)checkLogin:(GyCheckModel *)checkModel withCallback:(GyVerifyCallback)callback;
++ (void)checkLogin:(GyCheckModel *_Nonnull)checkModel withCallback:(GyVerifyCallback _Nonnull)callback;
 
 
 /**
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * @param readyAnimationCallback 动画回调
  * @param callback 通用接口回调
  */
-+ (void)nonSenseCaptcha:(NSString *)pnMD5 accountId:(NSString *)accountId businessId:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView readyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
++ (void)nonSenseCaptcha:(NSString *_Nonnull)pnMD5 accountId:(NSString *_Nonnull)accountId businessId:(NSString *_Nonnull)businessId isShowLoadingView:(BOOL)showLoadingView readyAnimation:(GyReadyAnimationCallback _Nonnull)readyAnimationCallback completeCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
  * 动画验证接口
@@ -140,7 +140,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * @param readyAnimationCallback 动画回调
  * @param callback 通用接口回调
  */
-+ (void)startAnimationCaptcha:(NSString *)businessId isShowLoadingView:(BOOL)showLoadingView isReadyAnimation:(GyReadyAnimationCallback)readyAnimationCallback completeCallback:(GyVerifyCallback)callback;
++ (void)startAnimationCaptcha:(NSString *_Nonnull)businessId isShowLoadingView:(BOOL)showLoadingView isReadyAnimation:(GyReadyAnimationCallback _Nonnull)readyAnimationCallback completeCallback:(GyVerifyCallback _Nonnull)callback;
 
 #pragma mark 一键登录功能, 包括设置预取号超时时间/预取号/登陆/关闭登陆页面等功能
 
@@ -163,7 +163,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * }
  *  其中中国移动有效期为 1 小时,中国联通和中国电信为 10 分钟。
  */
-+ (void)preGetToken:(GyVerifyCallback)callback;
++ (void)preGetToken:(GyVerifyCallback _Nonnull)callback;
 
 /**
  * 一键登录
@@ -185,7 +185,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * @discussion
  *  token 有效期:中国移动的有效期为 2 分钟，中国联通的为 30 分钟，中国电信的为 30 天。
  */
-+ (void)oneTapLogin:(UIViewController *)controller withViewModel:(GyAuthViewModel *)model andCallback:(GyVerifyCallback)callback;
++ (void)oneTapLogin:(UIViewController *_Nonnull)controller withViewModel:(GyAuthViewModel *_Nonnull)model andCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
  * 关闭登录界面
@@ -234,7 +234,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  network: 0/1/2/3
  * }
  */
-+ (NSMutableDictionary *)currentNetworkInfo;
++ (NSMutableDictionary *_Nonnull)currentNetworkInfo;
 
 #pragma mark 本机号码校验功能, 与一键登录功能无关联
 
@@ -251,7 +251,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  operatorType = 4; // NSString, 操作类型
  * }
  */
-+ (void)getPhoneVerifyToken:(NSString *)pn andCallback:(GyVerifyCallback)callback;
++ (void)getPhoneVerifyToken:(NSString *_Nonnull)pn andCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
  * 本机号码校验,本接口为客户端校验手机号使用
