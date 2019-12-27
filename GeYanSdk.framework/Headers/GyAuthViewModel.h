@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, OLAuthPopupAnimationStyle) {
 typedef void(^OLLoadingViewBlock)(UIView *containerView);
 
 /**
- * 停止授权页自定义Loading，会在调用[GetanSDK stopLoading]时触发
+ * 停止授权页自定义Loading，会在调用[GeyanSDK stopLoading]时触发
  * containerView为loading的全屏蒙版view
  */
 typedef void(^OLStopLoadingViewBlock)(UIView *containerView);
@@ -310,12 +310,12 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
 @property(nonatomic, assign) CGSize checkBoxSize;
 
 /**
- 隐私条款文字属性。默认基础文字灰色, 条款蓝色高亮, 12pt。
+ 隐私条款文字属性。默认条款蓝色高亮, 12pt。
  */
 @property(nullable, nonatomic, strong) NSDictionary<NSAttributedStringKey, id> *privacyTermsAttributes;
 
 /**
- 额外的条款。默认为空。
+ 额外的条款。默认为空。其中默认的隐私条款index为0.
  */
 @property(nullable, nonatomic, strong) NSArray<GyAuthPrivacyItem *> *additionalPrivacyTerms;
 
@@ -408,7 +408,7 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
 /**
  * 弹窗自定义动画
  */
-@property(nonatomic, strong) CATransition *popupTransitionAnimation;
+@property(nonatomic, strong) CAAnimation *popupTransitionAnimation;
 
 /**
  弹窗关闭按钮图片，弹窗关闭按钮的尺寸跟图片尺寸保持一致。

@@ -66,18 +66,21 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 
 
 /**
- 设置debug模式，发布时不要设置，默认关闭
-
- @param debug 是否打开调试
+ * 设置debug模式，发布时不要设置，默认关闭
+ * @param debug 是否打开调试
  */
 + (void)setDebug:(BOOL)debug;
+
++ (void)setOnlyUseOneLogin:(BOOL)onlyUseOL;
+
++ (void)setUseStrictMode:(BOOL)strictMode;
 
 /**
  获取SDK版本号
 
  @return SDK版本号
  */
-+ (NSString *_Nonnull )getVersion;
++ (NSString *_Nonnull)getVersion;
 
 /**
  *  初始化个验 SDK
@@ -103,7 +106,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param pnMD5    手机号md5值,32位小写
  *  @param callback 通用接口回调
  */
-+ (void)smsVerifyCode:(NSString *_Nonnull)code withPnMD5:(NSString *_Nonnull)pnMD5 withCallback:(GySmsVerifyCallback _Nonnull)callback;
++ (void)smsVerifyCode:(NSString *_Nonnull)code withPnMD5:(NSString *)pnMD5 withCallback:(GySmsVerifyCallback _Nonnull)callback;
 
 /**
  注册保护接口
@@ -161,7 +164,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  msg = "\U83b7\U53d6accessCode\U6210\U529f"; // NSString, 运营商返回的描述消息
  *  metadata = {}; // NSDictionary, 失败时, 运营商的响应内容。
  * }
- *  其中中国移动有效期为 1 小时,中国联通和中国电信为 10 分钟。
+ *  其中中国移动和中国电信有效期为 1 小时,中国联通为 10 分钟。
  */
 + (void)preGetToken:(GyVerifyCallback _Nonnull)callback;
 
@@ -179,7 +182,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  msg = "\U83b7\U53d6accessCode\U6210\U529f"; // NSString, 描述消息
  *  metadata = {}; // NSDictionary, 失败时, 运营商的响应内容。
  *  token = "xxx",  //NSString, 登陆成功返回的用户授权凭证信息,可以用于在服务端获取完整手机号码
- *  expiredTime: 155555555555, //NSInteger,成功时, token有效期
+ *  expiredTime: 155555555555,        //NSInteger,成功时, token有效期
  *  pn: "133****3333", //NSString,成功时, 脱敏7位手机号码
  * }
  * @discussion
@@ -236,6 +239,13 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  */
 + (NSMutableDictionary *_Nonnull)currentNetworkInfo;
 
+/**
+ * @abstract 获取当前授权页面对应的ViewController
+ *
+ * @return 当前授权页面对应的ViewController
+ */
++ (UIViewController * _Nullable)currentAuthViewController;
+
 #pragma mark 本机号码校验功能, 与一键登录功能无关联
 
 /**
@@ -267,7 +277,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  */
 + (void)checkPhoneNumber:(NSString *_Nonnull)pn andCallback:(GyVerifyCallback _Nonnull)callback __deprecated_msg("请使用 checkPhoneNumber:withToken:withProcessId:andCallback");
 
-+ (void)checkPhoneNumber:(NSString *_Nonnull)pn withToken:(NSString *_Nonnull)token withProcessId:(NSString *_Nonnull)processId andCallback:(GyVerifyCallback _Nonnull)callback;
++ (void)checkPhoneNumber:(NSString *)pn withToken:(NSString *)token withProcessId:(NSString *)processId withOperatorType:(NSString *)opType andCallback:(GyVerifyCallback)callback;
 
 #pragma mark 销毁 SDK
 
