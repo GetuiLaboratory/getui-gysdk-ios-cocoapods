@@ -131,6 +131,12 @@ typedef void(^OLClickCheckboxBlock)(BOOL isChecked);
  */
 typedef void(^OLTapAuthBackgroundBlock)(void);
 
+/**
+ * @abstract 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
+ */
+typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
+
+
 @interface GyAuthViewModel : NSObject
 
 #pragma mark - Status Bar/状态栏
@@ -357,6 +363,11 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
  */
 @property(nullable, nonatomic, copy) GYCustomUIHandler customUIHandler;
 
+/**
+ * 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
+ */
+@property (nullable, nonatomic, copy) OLAuthVCTransitionBlock authVCTransitionBlock;
+
 #pragma mark - Background Image/授权页面背景图片
 
 /**
@@ -399,6 +410,12 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
  弹窗圆角，默认为6。
  */
 @property(nonatomic, assign) CGFloat popupCornerRadius;
+
+/**
+ 当只需要设置弹窗的部分圆角时，通过popupCornerRadius设置圆角大小，通过popupRectCorners设置需要设置圆角的位置。
+ popupRectCorners数组元素不超过四个，超过四个时，只取前四个。比如，要设置左上和右上为圆角，则传值：@[@(UIRectCornerTopLeft), @(UIRectCornerTopRight)]
+ */
+@property (nonatomic, strong) NSArray<NSNumber *> *popupRectCorners;
 
 /**
  * 弹窗动画类型，当popupAnimationStyle为OLAuthPopupAnimationStyleStyleCustom时，动画为用户自定义，用户需要传一个CATransition对象来设置动画
