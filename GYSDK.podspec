@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GYSDK"
-  s.version      = "1.6.0.1"
+  s.version      = "1.6.1.0"
   s.summary      = "个验 iOS SDK CocoaPods 集成库"
 
   # This description is used to generate tags and improve search results.
