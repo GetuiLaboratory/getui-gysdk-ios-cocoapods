@@ -8,6 +8,7 @@
 
 #import "GyCheckModel.h"
 #import "GyAuthViewModel.h"
+#import "GyOneLoginPro.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -72,6 +73,13 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 + (void)setDebug:(BOOL)debug;
 
 + (void)setOnlyUseOneLogin:(BOOL)onlyUseOL;
+
+/**
+ * 需要在初始化前调用
+ * 当使用一键登录PRO模式时，会在初始化后立即进行预取号
+ * @param useOLPro  true 使用
+ */
++ (void)setUseOneLoginPro:(BOOL)useOLPro;
 
 + (void)setUseStrictMode:(BOOL)strictMode;
 
@@ -214,6 +222,13 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 + (void)disableAuthButton;
 
 /**
+ * @abstract 更新授权页面一键登录按钮的文案
+ *
+ * @param authButtonTitle 一键登录按钮的文案
+ */
++ (void)updateAuthButtonTitle:(NSAttributedString *)authButtonTitle;
+
+/**
  * @abstract 服务条款左边复选框是否勾选
  */
 + (BOOL)isProtocolCheckboxChecked;
@@ -237,7 +252,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  network: 0/1/2/3
  * }
  */
-+ (NSMutableDictionary *_Nonnull)currentNetworkInfo;
++ (NSMutableDictionary *_Nonnull)currentNetworkInfo DEPRECATED_MSG_ATTRIBUTE("");
 
 /**
  * @abstract 获取当前授权页面对应的ViewController
@@ -245,6 +260,12 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * @return 当前授权页面对应的ViewController
  */
 + (UIViewController * _Nullable)currentAuthViewController;
+
+/**
+ * 获取当前手机卡数量
+ * @return 0,1,2
+ */
++ (NSInteger)getCurrentCarrierCount;
 
 #pragma mark 本机号码校验功能, 与一键登录功能无关联
 

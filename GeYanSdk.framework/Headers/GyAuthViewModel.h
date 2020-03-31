@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * @abstract 授权登录页面自定义视图，customAreaView为授权页面的view，如，可将三方登录添加到授权登录页面
  */
-typedef void(^GYCustomUIHandler)(UIView *customAreaView);
+typedef void(^OLCustomUIHandler)(UIView *customAreaView);
 
 /**
  * @abstract 1、若授权页面只支持竖屏，只设置竖屏方向偏移；
@@ -136,6 +136,14 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
  */
 typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
 
+/**
+ * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
+ */
+typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
+    OLPullAuthVCStyleModal,
+    OLPullAuthVCStylePush
+};
+
 
 @interface GyAuthViewModel : NSObject
 
@@ -233,6 +241,11 @@ typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitio
  授权页切换账号按钮的颜色。默认蓝色。
  */
 @property(nullable, nonatomic, strong) UIColor *switchButtonColor;
+
+/**
+ 授权页切换账号按钮背景颜色。默认为 nil。
+ */
+@property (nullable, nonatomic, strong) UIColor *switchButtonBackgroundColor;
 
 /**
  授权页切换账号的字体。默认字体，15pt。
@@ -351,6 +364,12 @@ typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitio
 */
 @property (nonatomic, assign) NSTextAlignment termsAlignment;
 
+/**
+ * 点击授权页面隐私协议的回调，设置后所有的点击回调都默认走这里
+ * 如果PrivacyItem设置了回调将不会走这里
+ */
+@property (nullable, nonatomic, copy) OLPrivacyTermItemBlock carrierTermItemBlock;
+
 #pragma mark - Custom Area/自定义区域
 
 /**
@@ -361,7 +380,7 @@ typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitio
  如果导航栏没有隐藏, 顶部与导航栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
  如果导航栏隐藏, 顶部与状态栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
  */
-@property(nullable, nonatomic, copy) GYCustomUIHandler customUIHandler;
+@property(nullable, nonatomic, copy) OLCustomUIHandler customUIHandler;
 
 /**
  * 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
@@ -425,7 +444,7 @@ typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitio
 /**
  * 弹窗自定义动画
  */
-@property(nonatomic, strong) CAAnimation *popupTransitionAnimation;
+@property(nonatomic, strong, nullable) CAAnimation *popupTransitionAnimation;
 
 /**
  弹窗关闭按钮图片，弹窗关闭按钮的尺寸跟图片尺寸保持一致。
@@ -512,6 +531,25 @@ typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitio
  * dismiss授权页面时的自定义动画
  */
 @property (nonatomic, strong) CAAnimation *modalDismissAnimation;
+
+#pragma mark - OLPullAuthVCStyle
+
+/**
+ * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
+ */
+@property (nonatomic, assign) OLPullAuthVCStyle pullAuthVCStyle;
+
+#pragma mark - UIUserInterfaceStyle
+
+/**
+ * @abstract 授权页面 UIUserInterfaceStyle，默认为 UIUserInterfaceStyleLight，即 @(UIUserInterfaceStyleLight)
+ *
+ * UIUserInterfaceStyle
+ * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
+ * UIUserInterfaceStyleLight       - 明亮
+ * UIUserInterfaceStyleDark        - 暗黑 仅对 iOS 13+ 系统有效
+ */
+@property (nonatomic, strong) NSNumber *userInterfaceStyle;
 
 @end
 

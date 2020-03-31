@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class GyAuthPrivacyItem;
 
-typedef void(^OLPrivacyTermItemBlock)(GyAuthPrivacyItem *termItem);
+typedef void(^OLPrivacyTermItemBlock)(GyAuthPrivacyItem *termItem, UIViewController *controller);
 
 @interface GyAuthPrivacyItem : NSObject
 
