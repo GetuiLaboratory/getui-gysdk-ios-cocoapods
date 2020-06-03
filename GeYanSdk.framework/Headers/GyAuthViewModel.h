@@ -280,7 +280,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 @property(nonatomic, assign) OLRect authButtonRect;
 
 /**
- 授权按钮圆角，默认为0。
+ 授权按钮圆角，默认为5。
  */
 @property(nonatomic, assign) CGFloat authButtonCornerRadius;
 

@@ -114,7 +114,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param pnMD5    手机号md5值,32位小写
  *  @param callback 通用接口回调
  */
-+ (void)smsVerifyCode:(NSString *_Nonnull)code withPnMD5:(NSString *)pnMD5 withCallback:(GySmsVerifyCallback _Nonnull)callback;
++ (void)smsVerifyCode:(NSString *_Nonnull)code withPnMD5:(NSString *_Nullable)pnMD5 withCallback:(GySmsVerifyCallback _Nonnull)callback;
 
 /**
  注册保护接口
@@ -226,7 +226,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *
  * @param authButtonTitle 一键登录按钮的文案
  */
-+ (void)updateAuthButtonTitle:(NSAttributedString *)authButtonTitle;
++ (void)updateAuthButtonTitle:(NSAttributedString *_Nonnull)authButtonTitle;
 
 /**
  * @abstract 服务条款左边复选框是否勾选
@@ -282,7 +282,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  operatorType = 4; // NSString, 操作类型
  * }
  */
-+ (void)getPhoneVerifyToken:(NSString *_Nonnull)pn andCallback:(GyVerifyCallback _Nonnull)callback;
++ (void)getPhoneVerifyTokenCallback:(GyVerifyCallback)callback __deprecated_msg("接口已废弃");
 
 /**
  * 本机号码校验,本接口为客户端校验手机号使用
@@ -296,9 +296,9 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  msg: "success" // NSString, 返回信息
  * }
  */
-+ (void)checkPhoneNumber:(NSString *_Nonnull)pn andCallback:(GyVerifyCallback _Nonnull)callback __deprecated_msg("请使用 checkPhoneNumber:withToken:withProcessId:andCallback");
++ (void)checkPhoneNumber:(NSString *_Nonnull)pn withToken:(NSString *_Nonnull)token withProcessId:(NSString *_Nonnull)processId withOperatorType:(NSString *_Nonnull)opType andCallback:(GyVerifyCallback _Nonnull)callback __deprecated_msg("接口已废弃");
 
-+ (void)checkPhoneNumber:(NSString *)pn withToken:(NSString *)token withProcessId:(NSString *)processId withOperatorType:(NSString *)opType andCallback:(GyVerifyCallback)callback;
++ (void)checkPhoneNumber:(NSString *_Nonnull)pn andCallback:(GyVerifyCallback _Nonnull)callback __deprecated_msg("请使用 checkPhoneNumber:withToken:withProcessId:andCallback");
 
 #pragma mark 销毁 SDK
 
