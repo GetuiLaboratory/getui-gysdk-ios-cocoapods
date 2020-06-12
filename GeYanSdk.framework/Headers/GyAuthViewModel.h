@@ -463,6 +463,11 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 @property(nonatomic, strong) NSNumber *closePopupRightOffset;
 
 /**
+ 弹窗关闭按钮大小。默认11x22
+ */
+@property(nonatomic, assign) CGSize closePopupSize;
+
+/**
 是否需要通过点击弹窗的背景区域以关闭授权页面。
 */
 @property (nonatomic, assign) BOOL canClosePopupFromTapGesture;
@@ -470,7 +475,13 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 /**
 * 点击授权页面弹窗背景的回调
 */
-@property (nonatomic, copy) OLTapAuthBackgroundBlock tapAuthBackgroundBlock;
+@property (nonatomic, copy, nullable) OLTapAuthBackgroundBlock tapAuthBackgroundBlock;
+
+/**
+ * 弹窗页遮罩背景
+ * 默认半透明遮罩
+ */
+@property(nonatomic, strong, nullable) UIView *popupMaskView;
 
 #pragma mark - Loading
 
@@ -525,12 +536,12 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 /**
  * present授权页面时的自定义动画
  */
-@property (nonatomic, strong) CAAnimation *modalPresentationAnimation;
+@property (nonatomic, strong, nullable) CAAnimation *modalPresentationAnimation;
 
 /**
  * dismiss授权页面时的自定义动画
  */
-@property (nonatomic, strong) CAAnimation *modalDismissAnimation;
+@property (nonatomic, strong, nullable) CAAnimation *modalDismissAnimation;
 
 #pragma mark - OLPullAuthVCStyle
 

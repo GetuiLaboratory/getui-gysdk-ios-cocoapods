@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GYSDK"
-  s.version      = "2.0.0.0"
+  s.version      = "2.0.1.0"
   s.summary      = "个验 iOS SDK CocoaPods 集成库"
 
   # This description is used to generate tags and improve search results.
@@ -107,7 +107,7 @@ Pod::Spec.new do |s|
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   # 使用了第三方静态库
-  # s.ios.vendored_library = 'libGeTuiSdk-2.0.0.0.a'
+  # s.ios.vendored_library = 'libGeTuiSdk-2.0.1.0.a'
   #s.ios.vendored_libraries = ''
   s.ios.vendored_frameworks = 'GeYanSdk.framework'
 
