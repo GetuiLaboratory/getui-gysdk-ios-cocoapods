@@ -370,6 +370,12 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property (nullable, nonatomic, copy) OLPrivacyTermItemBlock carrierTermItemBlock;
 
+/**
+ * 是否在运营商协议名称上加书名号《》
+ * 默认NO
+ */
+@property (nonatomic, assign) BOOL hasQuotationMarkOnCarrierProtocol;
+
 #pragma mark - Custom Area/自定义区域
 
 /**
