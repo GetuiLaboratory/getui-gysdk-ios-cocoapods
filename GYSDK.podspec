@@ -61,7 +61,6 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios
   s.platform     = :ios, "9.0"
 
   #  When using multiple platforms
@@ -106,8 +105,10 @@ Pod::Spec.new do |s|
   # s.resources = "Resources/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
+  # 依赖的第三方pod
+  s.dependency 'GTCommonSDK', '1.2.0.0'
   # 使用了第三方静态库
-  s.ios.vendored_libraries = 'libGTCommonSDK-1.2.0.0.a'
+  # s.ios.vendored_libraries = 'libxxx.a'
   s.ios.vendored_frameworks = 'GeYanSdk.framework'
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
