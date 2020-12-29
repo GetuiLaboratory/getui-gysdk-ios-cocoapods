@@ -107,7 +107,7 @@ Pod::Spec.new do |s|
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   # 使用了第三方静态库
-  s.ios.vendored_library = 'libGTCommonSDK-1.2.0.0.a'
+  s.ios.vendored_libraries = 'libGTCommonSDK-1.2.0.0.a'
   s.ios.vendored_frameworks = 'GeYanSdk.framework'
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
