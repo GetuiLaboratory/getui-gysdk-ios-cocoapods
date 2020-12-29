@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GYSDK"
-  s.version      = "2.0.1.0"
+  s.version      = "2.0.2.0"
   s.summary      = "个验 iOS SDK CocoaPods 集成库"
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.homepage     = "https://github.com/GetuiLaboratory/getui-gysdk-ios-cocoapods"
+  s.homepage     = "https://docs.getui.com/geyan/"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -62,10 +62,10 @@ Pod::Spec.new do |s|
   #
 
   s.platform     = :ios
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "9.0"
 
   #  When using multiple platforms
-  s.ios.deployment_target = "7.0"
+  s.ios.deployment_target = "9.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
@@ -107,8 +107,7 @@ Pod::Spec.new do |s|
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   # 使用了第三方静态库
-  # s.ios.vendored_library = 'libGeTuiSdk-2.0.1.0.a'
-  #s.ios.vendored_libraries = ''
+  s.ios.vendored_library = 'libGTCommonSDK-1.2.0.0.a'
   s.ios.vendored_frameworks = 'GeYanSdk.framework'
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

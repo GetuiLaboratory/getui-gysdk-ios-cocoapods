@@ -134,7 +134,7 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
 /**
  * @abstract 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
  */
-typedef void(^OLAuthVCTransitionBlock)(CGSize size, id<UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
+typedef void(^OLAuthVCTransitionBlock)(CGSize size, id <UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
 
 /**
  * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
@@ -216,71 +216,71 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 #pragma mark - Phone Number Preview/手机号预览
 
 /**
- 号码预览文字的颜色。默认黑色。
+ * 号码预览文字的颜色。默认黑色。
  */
 @property(nullable, nonatomic, strong) UIColor *phoneNumColor;
 
 /**
- 号码预览文字的字体。默认粗体，24pt。
+ * 号码预览文字的字体。默认粗体，24pt。
  */
 @property(nullable, nonatomic, strong) UIFont *phoneNumFont;
 
 /**
- 号码预览 位置及大小，电话号码不支持设置大小，大小根据电话号码文字自适应
+ * 号码预览 位置及大小，电话号码不支持设置大小，大小根据电话号码文字自适应
  */
 @property(nonatomic, assign) OLRect phoneNumRect;
 
 #pragma mark - Switch Button/切换按钮
 
 /**
- 授权页切换账号按钮的文案。默认为“切换账号”。
+ * 授权页切换账号按钮的文案。默认为“切换账号”。
  */
 @property(nullable, nonatomic, copy) NSString *switchButtonText;
 
 /**
- 授权页切换账号按钮的颜色。默认蓝色。
+ * 授权页切换账号按钮的颜色。默认蓝色。
  */
 @property(nullable, nonatomic, strong) UIColor *switchButtonColor;
 
 /**
- 授权页切换账号按钮背景颜色。默认为 nil。
+ * 授权页切换账号按钮背景颜色。默认为 nil。
  */
-@property (nullable, nonatomic, strong) UIColor *switchButtonBackgroundColor;
+@property(nullable, nonatomic, strong) UIColor *switchButtonBackgroundColor;
 
 /**
- 授权页切换账号的字体。默认字体，15pt。
+ * 授权页切换账号的字体。默认字体，15pt。
  */
 @property(nullable, nonatomic, strong) UIFont *switchButtonFont;
 
 /**
- 授权页切换账号按钮 位置及大小。
+ * 授权页切换账号按钮 位置及大小。
  */
 @property(nonatomic, assign) OLRect switchButtonRect;
 
 /**
- 隐藏切换账号按钮。默认不隐藏。
+ * 隐藏切换账号按钮。默认不隐藏。
  */
 @property(nonatomic, assign) BOOL switchButtonHidden;
 
 #pragma mark - Authorization Button/认证按钮
 
 /**
- 授权页认证按钮的背景图片, @[正常状态的背景图片, 不可用状态的背景图片, 高亮状态的背景图片]。默认正常状态为蓝色纯色, 不可用状态的背景图片时为灰色, 高亮状态为灰蓝色。
+ * 授权页认证按钮的背景图片, @[正常状态的背景图片, 不可用状态的背景图片, 高亮状态的背景图片]。默认正常状态为蓝色纯色, 不可用状态的背景图片时为灰色, 高亮状态为灰蓝色。
  */
 @property(nullable, nonatomic, strong) NSArray<UIImage *> *authButtonImages;
 
 /**
- 授权按钮文案。默认白色的"一键登录"。
+ * 授权按钮文案。默认白色的"一键登录"。
  */
 @property(nullable, nonatomic, strong) NSAttributedString *authButtonTitle;
 
 /**
- 授权按钮 位置及大小。
+ * 授权按钮 位置及大小。
  */
 @property(nonatomic, assign) OLRect authButtonRect;
 
 /**
- 授权按钮圆角，默认为5。
+ * 授权按钮圆角，默认为5。
  */
 @property(nonatomic, assign) CGFloat authButtonCornerRadius;
 
@@ -292,65 +292,65 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 #pragma mark - Slogan/口号标语
 
 /**
- Slogan 位置及大小。
+ * Slogan 位置及大小。
  */
 @property(nonatomic, assign) OLRect sloganRect;
 
 /**
- Slogan 文字颜色。默认灰色。
+ * Slogan 文字颜色。默认灰色。
  */
 @property(nonatomic, strong) UIColor *sloganTextColor;
 
 /**
- Slogan字体。默认字体, 12pt。
+ * Slogan字体。默认字体, 12pt。
  */
 @property(nonatomic, strong) UIFont *sloganTextFont;
 
 #pragma mark - CheckBox & Privacy Terms/隐私条款勾选框及隐私条款
 
 /**
- 授权页面上条款勾选框初始状态。默认 YES。
+ * 授权页面上条款勾选框初始状态。默认 YES。
  */
 @property(nonatomic, assign) BOOL defaultCheckBoxState;
 
 /**
- 授权页面上勾选框勾选的图标。默认为蓝色图标。推荐尺寸为12x12。
+ * 授权页面上勾选框勾选的图标。默认为蓝色图标。推荐尺寸为12x12。
  */
 @property(nullable, nonatomic, strong) UIImage *checkedImage;
 
 /**
- 授权页面上勾选框未勾选的图标。默认为白色图标。推荐尺寸为12x12。
+ * 授权页面上勾选框未勾选的图标。默认为白色图标。推荐尺寸为12x12。
  */
 @property(nullable, nonatomic, strong) UIImage *uncheckedImage;
 
 /**
- 授权页面上条款勾选框大小。
+ * 授权页面上条款勾选框大小。
  */
 @property(nonatomic, assign) CGSize checkBoxSize;
 
 /**
- 隐私条款文字属性。默认条款蓝色高亮, 12pt。
+ * 隐私条款文字属性。默认条款蓝色高亮, 12pt。
  */
 @property(nullable, nonatomic, strong) NSDictionary<NSAttributedStringKey, id> *privacyTermsAttributes;
 
 /**
- 额外的条款。默认为空。其中默认的隐私条款index为0.
+ * 额外的条款。默认为空。其中默认的隐私条款index为0.
  */
 @property(nullable, nonatomic, strong) NSArray<GyAuthPrivacyItem *> *additionalPrivacyTerms;
 
 /**
- 服务条款普通文字的颜色。默认灰色。
+ * 服务条款普通文字的颜色。默认灰色。
  */
 @property(nullable, nonatomic, strong) UIColor *termTextColor;
 
 /**
- 隐私条款 位置及大小，隐私条款，宽需大于50，高需大于20，才会生效。
+ * 隐私条款 位置及大小，隐私条款，宽需大于50，高需大于20，才会生效。
  */
 @property(nonatomic, assign) OLRect termsRect;
 
 /**
- 除隐私条款外的其他文案，数组大小必须为4，元素依次为：条款前的文案、条款一和条款二连接符、条款二和条款三连接符，条款后的文案。
- 默认为@[@"登录即同意", @"和", @"、", @"并使用本机号码登录"]
+ * 除隐私条款外的其他文案，数组大小必须为4，元素依次为：条款前的文案、条款一和条款二连接符、条款二和条款三连接符，条款后的文案。
+ * 默认为@[@"登录即同意", @"和", @"、", @"并使用本机号码登录"]
  */
 @property(nullable, nonatomic, copy) NSArray<NSString *> *auxiliaryPrivacyWords;
 
@@ -362,54 +362,84 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 /**
 * 服务条款文案对齐方式，默认为NSTextAlignmentLeft
 */
-@property (nonatomic, assign) NSTextAlignment termsAlignment;
+@property(nonatomic, assign) NSTextAlignment termsAlignment;
 
 /**
  * 点击授权页面隐私协议的回调，设置后所有的点击回调都默认走这里
  * 如果PrivacyItem设置了回调将不会走这里
  */
-@property (nullable, nonatomic, copy) OLPrivacyTermItemBlock carrierTermItemBlock;
+@property(nullable, nonatomic, copy) OLPrivacyTermItemBlock carrierTermItemBlock;
 
 /**
  * 是否在运营商协议名称上加书名号《》
  * 默认NO
  */
-@property (nonatomic, assign) BOOL hasQuotationMarkOnCarrierProtocol;
+@property(nonatomic, assign) BOOL hasQuotationMarkOnCarrierProtocol;
+
+/**
+ * 隐私协议的点击响应属性
+ * 默认值：@{
+ *            NSUnderlineStyleAttributeName: @NO,
+ *            NSForegroundColorAttributeName: UIColor.redColor
+ *       }
+ */
+@property(nonatomic, nullable, copy) NSDictionary *activeLinkAttributes;
+
+/**
+ * 授权页面上勾选框 未勾选状态时点击登录按钮是否显示 提示弹窗
+ * 默认 YES
+ */
+@property(nonatomic, assign) BOOL showNotCheckProtocolHint;
 
 #pragma mark - Custom Area/自定义区域
 
 /**
- 自定义区域视图的处理block
- 
- @discussion
- 提供的视图容器使用NSLayoutConstraint与相关的视图进行布局约束。
- 如果导航栏没有隐藏, 顶部与导航栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
- 如果导航栏隐藏, 顶部与状态栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
+ * 自定义区域视图的处理block
+ * @discussion
+ * 提供的视图容器使用NSLayoutConstraint与相关的视图进行布局约束。
+ * 如果导航栏没有隐藏, 顶部与导航栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
+ * 如果导航栏隐藏, 顶部与状态栏底部对齐, 左边与屏幕左边对齐, 右边与屏幕右边对齐, 底部与屏幕底部对齐。
  */
 @property(nullable, nonatomic, copy) OLCustomUIHandler customUIHandler;
 
 /**
  * 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
  */
-@property (nullable, nonatomic, copy) OLAuthVCTransitionBlock authVCTransitionBlock;
+@property(nullable, nonatomic, copy) OLAuthVCTransitionBlock authVCTransitionBlock;
 
 #pragma mark - Background Image/授权页面背景图片
 
 /**
- 授权页背景颜色。默认白色。
+ * 授权页背景颜色。默认白色。
  */
 @property(nullable, nonatomic, strong) UIColor *backgroundColor;
 
 /**
- 授权页面背景图片
+ * 授权页面背景图片
  */
 @property(nullable, nonatomic, strong) UIImage *backgroundImage;
 
 
 /**
- 横屏模式授权页面背景图片
+ * 横屏模式授权页面背景图片
  */
 @property(nullable, nonatomic, strong) UIImage *landscapeBackgroundImage;
+
+/**
+ * 授权页面背景gif.
+ */
+@property(nullable, nonatomic, strong) NSString *backgroundGifPath;
+
+/**
+ * 授权页面背景video.
+ */
+@property(nullable, nonatomic, strong) NSString *backgroundVideoPath;
+
+/**
+ * 是否允许背景GIF 或者 video 循环播放
+ * 默认循环播放 YES
+ */
+@property (nonatomic, assign) BOOL allowGifOrVideoPlayRepeat;
 
 #pragma mark - orientationMask
 
@@ -440,7 +470,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  当只需要设置弹窗的部分圆角时，通过popupCornerRadius设置圆角大小，通过popupRectCorners设置需要设置圆角的位置。
  popupRectCorners数组元素不超过四个，超过四个时，只取前四个。比如，要设置左上和右上为圆角，则传值：@[@(UIRectCornerTopLeft), @(UIRectCornerTopRight)]
  */
-@property (nonatomic, strong) NSArray<NSNumber *> *popupRectCorners;
+@property(nonatomic, strong) NSArray<NSNumber *> *popupRectCorners;
 
 /**
  * 弹窗动画类型，当popupAnimationStyle为OLAuthPopupAnimationStyleStyleCustom时，动画为用户自定义，用户需要传一个CATransition对象来设置动画
@@ -476,12 +506,12 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 /**
 是否需要通过点击弹窗的背景区域以关闭授权页面。
 */
-@property (nonatomic, assign) BOOL canClosePopupFromTapGesture;
+@property(nonatomic, assign) BOOL canClosePopupFromTapGesture;
 
 /**
 * 点击授权页面弹窗背景的回调
 */
-@property (nonatomic, copy, nullable) OLTapAuthBackgroundBlock tapAuthBackgroundBlock;
+@property(nonatomic, copy, nullable) OLTapAuthBackgroundBlock tapAuthBackgroundBlock;
 
 /**
  * 弹窗页遮罩背景
@@ -502,6 +532,20 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 @property(nonatomic, copy, nullable) OLStopLoadingViewBlock stopLoadingViewBlock;
 
 #pragma mark - WebViewController Navigation/服务条款页面导航栏
+
+/**
+ * 隐私页面返回按钮隐藏。默认不隐藏。
+ */
+@property(nonatomic, assign) BOOL webBackBtnHidden;
+/**
+ * 隐私页面返回按钮。默认黑色系统样式返回图片。
+ */
+@property(nonatomic, assign) UIImage *webBackBtnImg;
+
+/**
+ 返回按钮位置及大小，返回按钮最大size为CGSizeMake(40, 40)。
+ */
+@property(nonatomic, assign) OLRect webBackBtnRect;
 
 /**
  服务条款页面导航栏隐藏。默认不隐藏。
@@ -542,19 +586,19 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 /**
  * present授权页面时的自定义动画
  */
-@property (nonatomic, strong, nullable) CAAnimation *modalPresentationAnimation;
+@property(nonatomic, strong, nullable) CAAnimation *modalPresentationAnimation;
 
 /**
  * dismiss授权页面时的自定义动画
  */
-@property (nonatomic, strong, nullable) CAAnimation *modalDismissAnimation;
+@property(nonatomic, strong, nullable) CAAnimation *modalDismissAnimation;
 
 #pragma mark - OLPullAuthVCStyle
 
 /**
  * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
  */
-@property (nonatomic, assign) OLPullAuthVCStyle pullAuthVCStyle;
+@property(nonatomic, assign) OLPullAuthVCStyle pullAuthVCStyle;
 
 #pragma mark - UIUserInterfaceStyle
 
@@ -566,7 +610,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  * UIUserInterfaceStyleLight       - 明亮
  * UIUserInterfaceStyleDark        - 暗黑 仅对 iOS 13+ 系统有效
  */
-@property (nonatomic, strong) NSNumber *userInterfaceStyle;
+@property(nonatomic, strong) NSNumber *userInterfaceStyle;
 
 @end
 

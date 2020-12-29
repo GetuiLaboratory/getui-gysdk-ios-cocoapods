@@ -5,6 +5,7 @@
 //  Created by admin on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
+// GySdk-Version: 2.0.2.0
 
 #import "GyCheckModel.h"
 #import "GyAuthViewModel.h"
@@ -51,51 +52,40 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
     /**
      *  Cloud + Sms 验证
      */
-            GyVerifyTypeCloudSms,
+    GyVerifyTypeCloudSms,
     /**
      *  Cloud 验证
      */
-            GyVerifyTypeCloud,
+    GyVerifyTypeCloud,
     /**
      *  Sms 验证
      */
-            GyVerifyTypeSms,
+    GyVerifyTypeSms,
 };
 
 
 @interface GeYanSdk : NSObject
 
 
-/**
- * 设置debug模式，发布时不要设置，默认关闭
- * @param debug 是否打开调试
- */
-+ (void)setDebug:(BOOL)debug;
-
 + (void)setOnlyUseOneLogin:(BOOL)onlyUseOL;
-
-/**
- * 需要在初始化前调用
- * 当使用一键登录PRO模式时，会在初始化后立即进行预取号
- * @param useOLPro  true 使用
- */
-+ (void)setUseOneLoginPro:(BOOL)useOLPro;
 
 + (void)setUseStrictMode:(BOOL)strictMode;
 
 /**
- 获取SDK版本号
-
- @return SDK版本号
- */
-+ (NSString *_Nonnull)getVersion;
-
-/**
  *  初始化个验 SDK
- *
+ *  任意情况初始化，若初始化失败，会在下一次接口请求时重试注册
  *  @param aAppId appid
  */
 + (void)startWithAppId:(NSString *_Nonnull)aAppId withCallback:(GyCallback _Nonnull)callback;
+
+/**
+ * 初始化SDK
+ * 适用于首次安装初始化，需要等待网络授权后再进行注册的情况
+ * @param aAppId 您申请的APPID
+ * @param timeout 等待授权超时时间,单位秒
+ * @param callback 初始化结果回调
+ */
++ (void)startWithAppId:(NSString *_Nonnull)aAppId withTimeout:(NSTimeInterval)timeout withCallback:(GyCallback _Nonnull)callback;
 
 /**
  *  云验证接口
@@ -117,18 +107,18 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 + (void)smsVerifyCode:(NSString *_Nonnull)code withPnMD5:(NSString *_Nullable)pnMD5 withCallback:(GySmsVerifyCallback _Nonnull)callback;
 
 /**
- 注册保护接口
-
- @param checkModel 校验模型
- @param callback 通用接口回调
+ * 注册保护接口
+ *
+ * @param checkModel 校验模型
+ * @param callback 通用接口回调
  */
 + (void)checkRegister:(GyCheckModel *_Nonnull)checkModel withCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
- 登录保护接口
- 
- @param checkModel 校验模型
- @param callback 通用接口回调
+ * 登录保护接口
+ *
+ * @param checkModel 校验模型
+ * @param callback 通用接口回调
  */
 + (void)checkLogin:(GyCheckModel *_Nonnull)checkModel withCallback:(GyVerifyCallback _Nonnull)callback;
 
@@ -142,7 +132,12 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * @param readyAnimationCallback 动画回调
  * @param callback 通用接口回调
  */
-+ (void)nonSenseCaptcha:(NSString *_Nonnull)pnMD5 accountId:(NSString *_Nonnull)accountId businessId:(NSString *_Nonnull)businessId isShowLoadingView:(BOOL)showLoadingView readyAnimation:(GyReadyAnimationCallback _Nonnull)readyAnimationCallback completeCallback:(GyVerifyCallback _Nonnull)callback;
++ (void)nonSenseCaptcha:(NSString *_Nonnull)pnMD5
+              accountId:(NSString *_Nonnull)accountId
+             businessId:(NSString *_Nonnull)businessId
+      isShowLoadingView:(BOOL)showLoadingView
+         readyAnimation:(GyReadyAnimationCallback _Nonnull)readyAnimationCallback
+       completeCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
  * 动画验证接口
@@ -151,7 +146,10 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  * @param readyAnimationCallback 动画回调
  * @param callback 通用接口回调
  */
-+ (void)startAnimationCaptcha:(NSString *_Nonnull)businessId isShowLoadingView:(BOOL)showLoadingView isReadyAnimation:(GyReadyAnimationCallback _Nonnull)readyAnimationCallback completeCallback:(GyVerifyCallback _Nonnull)callback;
++ (void)startAnimationCaptcha:(NSString *_Nonnull)businessId
+            isShowLoadingView:(BOOL)showLoadingView
+             isReadyAnimation:(GyReadyAnimationCallback _Nonnull)readyAnimationCallback
+             completeCallback:(GyVerifyCallback _Nonnull)callback;
 
 #pragma mark 一键登录功能, 包括设置预取号超时时间/预取号/登陆/关闭登陆页面等功能
 
@@ -242,6 +240,11 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 + (BOOL)isPreGettedTokenValidate;
 
 /**
+ * 删除预取号缓存
+ */
++ (void)deletePreResultCache;
+
+/**
  * 当前网络环境
  * 根据返回结果判断是否适合使用一键登录方法(数据网络必须打开,如下所示,需要满足network==1 || network==3)
  * carrier: 运营商： 0.未知 / 1.中国移动 / 2.中国联通 / 3.中国电信
@@ -259,7 +262,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *
  * @return 当前授权页面对应的ViewController
  */
-+ (UIViewController * _Nullable)currentAuthViewController;
++ (UIViewController *_Nullable)currentAuthViewController;
 
 /**
  * 获取当前手机卡数量
@@ -271,7 +274,6 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
 
 /**
  * 获取本机号码校验所需要的 processID 和 token
- * @param pn 待校验手机号码
  * @param callback 回调
  * {
  *  code: 30000, //NSNumber, 非30000为失败
@@ -280,9 +282,10 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  token: "xxx" // NSString, 授权凭证
  *  processID: "xxx" // NSString, 流水号
  *  operatorType = 4; // NSString, 操作类型
+ *
  * }
  */
-+ (void)getPhoneVerifyTokenCallback:(GyVerifyCallback)callback __deprecated_msg("接口已废弃");
++ (void)getPhoneVerifyTokenCallback:(GyVerifyCallback _Nonnull)callback;
 
 /**
  * 本机号码校验,本接口为客户端校验手机号使用
@@ -296,11 +299,23 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  msg: "success" // NSString, 返回信息
  * }
  */
-+ (void)checkPhoneNumber:(NSString *_Nonnull)pn withToken:(NSString *_Nonnull)token withProcessId:(NSString *_Nonnull)processId withOperatorType:(NSString *_Nonnull)opType andCallback:(GyVerifyCallback _Nonnull)callback __deprecated_msg("接口已废弃");
++ (void)checkPhoneNumber:(NSString *_Nonnull)pn withToken:(NSString *_Nonnull)token withProcessId:(NSString *_Nonnull)processId withOperatorType:(NSString *_Nonnull)opType andCallback:(GyVerifyCallback _Nonnull)callback;
 
 + (void)checkPhoneNumber:(NSString *_Nonnull)pn andCallback:(GyVerifyCallback _Nonnull)callback __deprecated_msg("请使用 checkPhoneNumber:withToken:withProcessId:andCallback");
 
-#pragma mark 销毁 SDK
+
+/**
+ * 获取SDK版本号
+ *
+ * @return SDK版本号
+ */
++ (NSString *_Nonnull)getVersion;
+
+/**
+ * 设置debug模式，发布时不要设置，默认关闭
+ * @param debug 是否打开调试
+ */
++ (void)setDebug:(BOOL)debug;
 
 /**
  *  销毁 SDK
