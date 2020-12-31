@@ -106,7 +106,7 @@ Pod::Spec.new do |s|
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   # 依赖的第三方pod
-  s.dependency 'GTCommonSDK', '1.2.0.0'
+  s.dependency 'GTCommonSDK', '>=1.2.0.0'
   # 使用了第三方静态库
   # s.ios.vendored_libraries = 'libxxx.a'
   s.ios.vendored_frameworks = 'GeYanSdk.framework'
