@@ -540,7 +540,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 /**
  * 隐私页面返回按钮。默认黑色系统样式返回图片。
  */
-@property(nonatomic, assign) UIImage *webBackBtnImg;
+@property(nonatomic, strong) UIImage *webBackBtnImg;
 
 /**
  返回按钮位置及大小，返回按钮最大size为CGSizeMake(40, 40)。
