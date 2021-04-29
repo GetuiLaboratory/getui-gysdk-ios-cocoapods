@@ -5,7 +5,7 @@
 //  Created by admin on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
-// GySdk-Version: 2.0.5.0
+// GySdk-Version: 2.0.6.0
 
 #import "GyCheckModel.h"
 #import "GyAuthViewModel.h"
@@ -77,6 +77,16 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  @param aAppId appid
  */
 + (void)startWithAppId:(NSString *_Nonnull)aAppId withCallback:(GyCallback _Nonnull)callback;
+
+/**
+ *  设置IDFA
+ *
+ *  SDK-2.0.6.0+
+ *
+ *  @param idfa idfa
+ */
++ (void)setIDFA:(NSString *_Nonnull)idfa;
+
 
 /**
  * 初始化SDK

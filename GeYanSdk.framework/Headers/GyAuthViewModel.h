@@ -600,6 +600,12 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, assign) OLPullAuthVCStyle pullAuthVCStyle;
 
+
+/**
+ * presentViewController 或者 pushViewController 授权页时， 是否设置动画animated。 默认YES
+ */
+@property(nonatomic, assign) BOOL pullAnimate;
+
 #pragma mark - UIUserInterfaceStyle
 
 /**
