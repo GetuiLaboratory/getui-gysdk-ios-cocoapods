@@ -122,6 +122,11 @@ typedef void(^OLAuthViewLifeCycleBlock)(NSString *viewLifeCycle, BOOL animated);
 typedef void(^OLClickAuthButtonBlock)(void);
 
 /**
+ * 未勾选状态时点击登录按钮的回调
+ */
+typedef BOOL(^OLProtocolHintBlock)(void);
+
+/**
  * 点击授权页面隐私协议前勾选框的回调
  */
 typedef void(^OLClickCheckboxBlock)(BOOL isChecked);
@@ -135,6 +140,7 @@ typedef void(^OLTapAuthBackgroundBlock)(void);
  * @abstract 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
  */
 typedef void(^OLAuthVCTransitionBlock)(CGSize size, id <UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
+
 
 /**
  * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
@@ -390,6 +396,19 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  * 默认 YES
  */
 @property(nonatomic, assign) BOOL showNotCheckProtocolHint;
+
+/*
+ * 授权页面上勾选框 未勾选状态时点击登录按钮的提示弹窗  y轴偏移量
+ * 默认 0
+ */
+@property(nonatomic, assign) CGFloat protocolHintOffsetY;
+
+/**
+ * 未勾选状态时点击登录按钮的回调
+ * 返回YES，提示sdk内置toast
+ * 返回NO，用户自定义toast
+ */
+@property(nullable, nonatomic, copy) OLProtocolHintBlock protocolHintBlock;
 
 #pragma mark - Custom Area/自定义区域
 

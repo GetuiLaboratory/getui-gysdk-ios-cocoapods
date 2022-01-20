@@ -5,7 +5,7 @@
 //  Created by admin on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
-// GySdk-Version: 2.0.9.0
+// GySdk-Version: 2.0.10.0
 
 #import "GyCheckModel.h"
 #import "GyAuthViewModel.h"
@@ -331,5 +331,7 @@ typedef NS_ENUM(NSUInteger, GyVerifyType) {
  *  销毁 SDK
  */
 + (void)destroy;
+
++ (nullable NSString *)gyuid;
 
 @end
