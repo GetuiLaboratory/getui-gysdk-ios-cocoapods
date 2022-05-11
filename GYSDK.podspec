@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GYSDK"
-  s.version      = "2.0.10.0"
+  s.version      = "2.2.0.0"
   s.summary      = "个验 iOS SDK CocoaPods 集成库"
 
   s.homepage     = "https://docs.getui.com/geyan/"
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/GetuiLaboratory/getui-gysdk-ios-cocoapods.git", :tag => "#{s.version}" }
 
   # 依赖的第三方pod
-  s.dependency 'GTCommonSDK', '~> 1.2.5.0'
+  s.dependency 'GTCommonSDK', '~> 1.2.8.0'
 
   # 使用了第三方静态库
   # s.ios.vendored_libraries = 'libxxx.a'
