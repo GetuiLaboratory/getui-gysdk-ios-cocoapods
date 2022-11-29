@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@interface GyContentModel : NSObject
+@property (nonatomic, copy) NSString *pn;
+@property (nonatomic, copy) NSString *slogan;
+@property (nonatomic, copy) NSString *term;
+@property (nonatomic, copy) NSString *link;
+
++ (GyContentModel*)contentModel;
+@end
+
 @interface GyCheckModel : NSObject
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *email;

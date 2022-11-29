@@ -1,16 +1,12 @@
 Pod::Spec.new do |s|
 
   s.name         = "GYSDK"
-  s.version      = "2.2.3.0"
+  s.version      = "3.0.1.0"
   s.summary      = "个验 iOS SDK CocoaPods 集成库"
 
   s.homepage     = "https://docs.getui.com/geyan/"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-
-
 
   s.license      = "MIT"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
   s.author       = { "个推" => "support@getui.com" }
 
@@ -21,7 +17,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/GetuiLaboratory/getui-gysdk-ios-cocoapods.git", :tag => "#{s.version}" }
 
   # 依赖的第三方pod
-  s.dependency 'GTCommonSDK', '<=1.3.0.0'
+  s.dependency 'GTCommonSDK', '>=3.0.0.0'
 
   # 使用了第三方静态库
   # s.ios.vendored_libraries = 'libxxx.a'
@@ -32,7 +28,7 @@ Pod::Spec.new do |s|
   s.libraries = 'z','c++'
 
   s.requires_arc = true
-  s.static_framework = true
 
+  s.static_framework = true
 
 end

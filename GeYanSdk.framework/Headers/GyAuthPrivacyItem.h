@@ -47,7 +47,6 @@ typedef void(^OLPrivacyTermItemBlock)(GyAuthPrivacyItem *termItem, UIViewControl
  * init
  * @param title 标题。可以设置为NSString或者NSAttributedString
  * @param url 条款链接
- * @return
  */
 - (instancetype)initWithTitle:(id)title linkURL:(NSURL *)url;
 
@@ -56,7 +55,6 @@ typedef void(^OLPrivacyTermItemBlock)(GyAuthPrivacyItem *termItem, UIViewControl
  * @param title 标题。可以设置为NSString或者NSAttributedString
  * @param url 条款链接
  * @param index 排序索引，默认从小到大
- * @return
  */
 - (instancetype)initWithTitle:(id)title linkURL:(NSURL *)url index:(NSInteger)index;
 
@@ -66,7 +64,6 @@ typedef void(^OLPrivacyTermItemBlock)(GyAuthPrivacyItem *termItem, UIViewControl
  * @param url 条款链接
  * @param index 排序索引，默认从小到大
  * @param block 点击回调
- * @return
  */
 - (instancetype)initWithTitle:(id)title linkURL:(NSURL *)url index:(NSInteger)index block:(OLPrivacyTermItemBlock _Nullable)block;
 
@@ -76,9 +73,11 @@ typedef void(^OLPrivacyTermItemBlock)(GyAuthPrivacyItem *termItem, UIViewControl
  * @param urlRequest 条款链接NSURLRequest，可加载本地html
  * @param index 排序索引，默认从小到大
  * @param block 点击回调
- * @return
  */
 - (instancetype)initWithTitle:(id)title urlRequest:(NSURLRequest *)urlRequest index:(NSInteger)index block:(OLPrivacyTermItemBlock _Nullable)block;
+
+- (NSString *)text;
+- (nullable NSURL *)url;
 @end
 
 NS_ASSUME_NONNULL_END

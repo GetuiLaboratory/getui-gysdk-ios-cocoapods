@@ -11,6 +11,69 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^GyVoidBlock)(void);
+typedef BOOL(^GyBoolBlock)(void);
+
+/**
+ * 授权页面视图生命周期回调
+ * @param viewLifeCycle 值为viewDidLoad、viewWillAppear、viewWillDisappear、viewDidAppear、viewDidDisappear
+ * @param animated 是否有动画
+ */
+typedef void(^OLAuthViewLifeCycleBlock)(NSString *viewLifeCycle, BOOL animated);
+
+
+/// 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
+typedef void(^OLAuthVCTransitionBlock)(CGSize size, id <UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
+
+
+typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
+    OLPullAuthVCStyleModal,
+    OLPullAuthVCStylePush
+};
+
+@interface GyAuthViewModel : NSObject
+
+//MARK: - StatusBar
+
+/// 状态栏样式。 默认 `UIStatusBarStyleDefault`。
+@property(nonatomic, assign) UIStatusBarStyle statusBarStyle;
+
+/**
+ * 授权页面 UIUserInterfaceStyle，默认为 UIUserInterfaceStyleLight，即 @(UIUserInterfaceStyleLight)
+ *
+ * UIUserInterfaceStyle
+ * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
+ * UIUserInterfaceStyleLight       - 明亮
+ * UIUserInterfaceStyleDark        - 暗黑 仅对 iOS 13+ 系统有效
+ */
+@property(nonatomic, strong) NSNumber *userInterfaceStyle;
+
+//MARK: - LifeCycle
+
+/// 授权页面视图生命周期回调。
+@property(nullable, nonatomic, copy) OLAuthViewLifeCycleBlock viewLifeCycleBlock;
+
+//MARK: - VCStyle
+
+/// 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
+@property(nonatomic, assign) OLPullAuthVCStyle pullAuthVCStyle;
+
+/// presentViewController 或者 pushViewController 授权页时， 是否设置动画animated。 默认YES
+@property(nonatomic, assign) BOOL pullAnimate;
+
+
+/**
+ * 点击授权页面授权按钮的回调
+ * 返回YES，继续登录操作
+ * 返回NO，中断登录
+ * at 3.0.0.0
+ */
+@property(nullable, nonatomic, copy) GyBoolBlock clickAuthButtonBlock;
+
+@end
+
+//MARK: - 废弃
+
 /**
  * @abstract 授权登录页面自定义视图，customAreaView为授权页面的view，如，可将三方登录添加到授权登录页面
  */
@@ -108,24 +171,6 @@ typedef void(^OLLoadingViewBlock)(UIView *containerView);
  * containerView为loading的全屏蒙版view
  */
 typedef void(^OLStopLoadingViewBlock)(UIView *containerView);
-
-/**
- * 授权页面视图生命周期回调
- * @param viewLifeCycle 值为viewDidLoad、viewWillAppear、viewWillDisappear、viewDidAppear、viewDidDisappear
- * @param animated 是否有动画
- */
-typedef void(^OLAuthViewLifeCycleBlock)(NSString *viewLifeCycle, BOOL animated);
-
-/**
- * 点击授权页面授权按钮的回调
- */
-typedef void(^OLClickAuthButtonBlock)(void);
-
-/**
- * 未勾选状态时点击登录按钮的回调
- */
-typedef BOOL(^OLProtocolHintBlock)(void);
-
 /**
  * 点击授权页面隐私协议前勾选框的回调
  */
@@ -136,31 +181,10 @@ typedef void(^OLClickCheckboxBlock)(BOOL isChecked);
  */
 typedef void(^OLTapAuthBackgroundBlock)(void);
 
-/**
- * @abstract 授权页面旋转时的回调，可在该回调中修改自定义视图的frame，以适应新的布局
- */
-typedef void(^OLAuthVCTransitionBlock)(CGSize size, id <UIViewControllerTransitionCoordinator> coordinator, UIView *customAreaView);
+//MARK: - 废弃
+@interface GyAuthViewModel()
 
-
-/**
- * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
- */
-typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
-    OLPullAuthVCStyleModal,
-    OLPullAuthVCStylePush
-};
-
-
-@interface GyAuthViewModel : NSObject
-
-#pragma mark - Status Bar/状态栏
-
-/**
- 状态栏样式。 默认 `UIStatusBarStyleDefault`。
- */
-@property(nonatomic, assign) UIStatusBarStyle statusBarStyle;
-
-#pragma mark - Navigation/导航
+//MARK: - Navigation/导航
 
 /**
  授权页导航的标题。默认为空字符串。
@@ -197,7 +221,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, assign) BOOL backButtonHidden;
 
-#pragma mark - Logo/图标
+//MARK: - Logo/图标
 
 /**
  授权页面上展示的图标。默认为 "applogo" 图标。
@@ -219,7 +243,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, assign) CGFloat logoCornerRadius;
 
-#pragma mark - Phone Number Preview/手机号预览
+//MARK: - Phone Number Preview/手机号预览
 
 /**
  * 号码预览文字的颜色。默认黑色。
@@ -236,7 +260,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, assign) OLRect phoneNumRect;
 
-#pragma mark - Switch Button/切换按钮
+//MARK: - Switch Button/切换按钮
 
 /**
  * 授权页切换账号按钮的文案。默认为“切换账号”。
@@ -268,7 +292,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, assign) BOOL switchButtonHidden;
 
-#pragma mark - Authorization Button/认证按钮
+//MARK: - Authorization Button/认证按钮
 
 /**
  * 授权页认证按钮的背景图片, @[正常状态的背景图片, 不可用状态的背景图片, 高亮状态的背景图片]。默认正常状态为蓝色纯色, 不可用状态的背景图片时为灰色, 高亮状态为灰蓝色。
@@ -290,12 +314,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, assign) CGFloat authButtonCornerRadius;
 
-/**
- * 点击授权页面授权按钮的回调
- */
-@property(nullable, nonatomic, copy) OLClickAuthButtonBlock clickAuthButtonBlock;
-
-#pragma mark - Slogan/口号标语
+//MARK: - Slogan/口号标语
 
 /**
  * Slogan 位置及大小。
@@ -312,7 +331,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, strong) UIFont *sloganTextFont;
 
-#pragma mark - CheckBox & Privacy Terms/隐私条款勾选框及隐私条款
+//MARK: - CheckBox & Privacy Terms/隐私条款勾选框及隐私条款
 
 /**
  * 授权页面上条款勾选框初始状态。默认 YES。
@@ -408,9 +427,9 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  * 返回YES，提示sdk内置toast
  * 返回NO，用户自定义toast
  */
-@property(nullable, nonatomic, copy) OLProtocolHintBlock protocolHintBlock;
+@property(nullable, nonatomic, copy) GyBoolBlock protocolHintBlock;
 
-#pragma mark - Custom Area/自定义区域
+//MARK: - Custom Area/自定义区域
 
 /**
  * 自定义区域视图的处理block
@@ -426,7 +445,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nullable, nonatomic, copy) OLAuthVCTransitionBlock authVCTransitionBlock;
 
-#pragma mark - Background Image/授权页面背景图片
+//MARK: - Background Image/授权页面背景图片
 
 /**
  * 授权页背景颜色。默认白色。
@@ -460,7 +479,24 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property (nonatomic, assign) BOOL allowGifOrVideoPlayRepeat;
 
-#pragma mark - orientationMask
+//MARK: - UIModalPresentationStyle
+
+/**
+ present授权页面时的样式，默认为UIModalPresentationFullScreen
+ */
+@property(nonatomic, assign) UIModalPresentationStyle modalPresentationStyle;
+
+/**
+ * present授权页面时的自定义动画
+ */
+@property(nonatomic, strong, nullable) CAAnimation *modalPresentationAnimation;
+
+/**
+ * dismiss授权页面时的自定义动画
+ */
+@property(nonatomic, strong, nullable) CAAnimation *modalDismissAnimation;
+
+//MARK: - orientationMask
 
 /**
  * 授权页面支持的横竖屏方向
@@ -468,7 +504,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
 @property(nonatomic, assign) UIInterfaceOrientationMask supportedInterfaceOrientations;
 
 
-#pragma mark - Popup
+//MARK: - Popup
 
 /**
  * 是否为弹窗模式
@@ -538,7 +574,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, strong, nullable) UIView *popupMaskView;
 
-#pragma mark - Loading
+//MARK: - Loading
 
 /**
  * 授权页面，自定义加载进度条，点击登录按钮之后的回调
@@ -550,7 +586,7 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nonatomic, copy, nullable) OLStopLoadingViewBlock stopLoadingViewBlock;
 
-#pragma mark - WebViewController Navigation/服务条款页面导航栏
+//MARK: - WebViewController Navigation/服务条款页面导航栏
 
 /**
  * 隐私页面返回按钮隐藏。默认不隐藏。
@@ -581,62 +617,21 @@ typedef NS_ENUM(NSInteger, OLPullAuthVCStyle) {
  */
 @property(nullable, nonatomic, strong) UIColor *webNaviBgColor;
 
-#pragma mark - Hint
+//MARK: - Hint
 
 /**
  未勾选服务条款复选框时，点击登录按钮的提示。默认为"请同意服务条款"。
  */
 @property(nullable, nonatomic, copy) NSString *notCheckProtocolHint;
 
-#pragma mark - OLAuthViewLifeCycleBlock
-
-/**
- 授权页面视图生命周期回调。
- */
-@property(nullable, nonatomic, copy) OLAuthViewLifeCycleBlock viewLifeCycleBlock;
-
-#pragma mark - UIModalPresentationStyle
-
-/**
- present授权页面时的样式，默认为UIModalPresentationFullScreen
- */
-@property(nonatomic, assign) UIModalPresentationStyle modalPresentationStyle;
-
-/**
- * present授权页面时的自定义动画
- */
-@property(nonatomic, strong, nullable) CAAnimation *modalPresentationAnimation;
-
-/**
- * dismiss授权页面时的自定义动画
- */
-@property(nonatomic, strong, nullable) CAAnimation *modalDismissAnimation;
-
-#pragma mark - OLPullAuthVCStyle
-
-/**
- * @abstract 进入授权页面的方式，默认为 modal 方式，即 present 到授权页面，从授权页面进入服务条款页面的方式与此保持一致
- */
-@property(nonatomic, assign) OLPullAuthVCStyle pullAuthVCStyle;
-
-
-/**
- * presentViewController 或者 pushViewController 授权页时， 是否设置动画animated。 默认YES
- */
-@property(nonatomic, assign) BOOL pullAnimate;
-
-#pragma mark - UIUserInterfaceStyle
-
-/**
- * @abstract 授权页面 UIUserInterfaceStyle，默认为 UIUserInterfaceStyleLight，即 @(UIUserInterfaceStyleLight)
- *
- * UIUserInterfaceStyle
- * UIUserInterfaceStyleUnspecified - 不指定样式，跟随系统设置进行展示
- * UIUserInterfaceStyleLight       - 明亮
- * UIUserInterfaceStyleDark        - 暗黑 仅对 iOS 13+ 系统有效
- */
-@property(nonatomic, strong) NSNumber *userInterfaceStyle;
 
 @end
-
+FOUNDATION_EXPORT OLRect GYOLRectMake(CGFloat y,
+                                          CGFloat centerX,
+                                          CGFloat x,
+                                          CGFloat yLandscape,
+                                          CGFloat centerXLandscape,
+                                          CGFloat xLandscape,
+                                          CGSize size);
+FOUNDATION_EXPORT OLRect GYOLRectZero;
 NS_ASSUME_NONNULL_END
