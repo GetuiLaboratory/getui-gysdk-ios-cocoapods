@@ -5,7 +5,7 @@
 //  Created by ak on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
-// GySdk-Version: 3.0.1.0
+// GySdk-Version: 3.0.2.0
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, GyOperatorType) {
 #import <GeYanSdk/GyCheckModel.h>
 #import <GeYanSdk/GyAuthViewModel.h>
 #import <GeYanSdk/GyAuthPrivacyItem.h>
+#import <GeYanSdk/GyOneLoginPro.h>
 #else
 #import "GyCheckModel.h"
 #import "GyAuthViewModel.h"

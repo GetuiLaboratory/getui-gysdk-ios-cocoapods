@@ -14,7 +14,7 @@
 @property (nonatomic, copy) NSString *term;
 @property (nonatomic, copy) NSString *link;
 
-+ (GyContentModel*)contentModel;
++ (GyContentModel*)currentModel;
 @end
 
 @interface GyCheckModel : NSObject
