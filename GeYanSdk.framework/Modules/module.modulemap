@@ -1,5 +1,0 @@
-framework module GeYanSdk {
-  umbrella header "GeYanSdk.h"
-  export *
-  module * { export * }
-}
