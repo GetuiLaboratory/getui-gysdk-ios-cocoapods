@@ -9,6 +9,6 @@
 ## podfile 配置
 ``` java
 platform :ios, "7.0"
-pod 'GYSDK'
+pod 'GYSDK'[gy-gysdk-ios](..%2Fgy-gysdk-ios)
 
 ```

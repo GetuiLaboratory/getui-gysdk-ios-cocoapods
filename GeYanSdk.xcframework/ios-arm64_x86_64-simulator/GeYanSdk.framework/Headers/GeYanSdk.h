@@ -5,7 +5,7 @@
 //  Created by ak on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
-// GySdk-Version: 3.0.7.0
+// GySdk-Version: 3.0.8.0
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
