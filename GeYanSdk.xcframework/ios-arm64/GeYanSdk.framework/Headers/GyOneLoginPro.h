@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
  @seealso GyAuthViewModel
 
  */
-+ (void)requestTokenWithViewController:(UIViewController *)viewController
-                             viewModel:(GyAuthViewModel *)viewModel
-                            completion:(void (^)(NSDictionary *_Nullable result))completion;
+//+ (void)requestTokenWithViewController:(UIViewController *)viewController
+//                             viewModel:(GyAuthViewModel *)viewModel
+//                            completion:(void (^)(NSDictionary *_Nullable result))completion;
 
 + (void)requestTokenWithCompletion:(void (^)(NSDictionary *_Nullable result))completion;
 

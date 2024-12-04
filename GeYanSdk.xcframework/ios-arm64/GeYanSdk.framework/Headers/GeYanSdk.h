@@ -5,7 +5,7 @@
 //  Created by ak on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
-// GySdk-Version: 3.0.10.0
+// GySdk-Version: 3.1.0.0
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -60,23 +60,23 @@ typedef void (^GyVerifyCallback)(NSDictionary *_Nullable verifyDictionary);
 /// SDK-3.0.0.0+
 + (void)setEloginTimeout:(NSTimeInterval)timeout;
 
-/// 设置联通参数， 优化首次取号速度
-/// - Parameters:
-///   - appId: appId
-///   - appKey: appKey
-+ (void)setUnicomWithAppId:(NSString* _Nonnull)appId appKey:(NSString* _Nonnull)appKey;
-
-/// 设置移动参数， 优化首次取号速度
-/// - Parameters:
-///   - appId: appId
-///   - appKey: appKey
-+ (void)setMobileWithAppId:(NSString* _Nonnull)appId appKey:(NSString* _Nonnull)appKey;
-
-/// 设置电信参数， 优化首次取号速度
-/// - Parameters:
-///   - appId: appId
-///   - appKey: appKey
-+ (void)setTelecomWithAppId:(NSString* _Nonnull)appId appKey:(NSString* _Nonnull)appKey;
+///// 设置联通参数， 优化首次取号速度
+///// - Parameters:
+/////   - appId: appId
+/////   - appKey: appKey
+//+ (void)setUnicomWithAppId:(NSString* _Nonnull)appId appKey:(NSString* _Nonnull)appKey;
+//
+///// 设置移动参数， 优化首次取号速度
+///// - Parameters:
+/////   - appId: appId
+/////   - appKey: appKey
+//+ (void)setMobileWithAppId:(NSString* _Nonnull)appId appKey:(NSString* _Nonnull)appKey;
+//
+///// 设置电信参数， 优化首次取号速度
+///// - Parameters:
+/////   - appId: appId
+/////   - appKey: appKey
+//+ (void)setTelecomWithAppId:(NSString* _Nonnull)appId appKey:(NSString* _Nonnull)appKey;
 
 //MARK: - 预取号
 
