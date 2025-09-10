@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/GeYanSdk.h</key>
 		<data>
-		YU0umyDyO0v1tmY/rp0EB+jwZw8=
+		jiAKtZiP0zkwYJooX8B5XSx57+A=
 		</data>
 		<key>Headers/GyAuthPrivacyItem.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		0etEM0npaVcdvcuIEEScPaLv0I0=
+		kOWgOL8uhoKcgb0INJWqAKxDf0g=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YU0umyDyO0v1tmY/rp0EB+jwZw8=
+			jiAKtZiP0zkwYJooX8B5XSx57+A=
 			</data>
 			<key>hash2</key>
 			<data>
-			Bytirr6K4V1BVgiSLKDeCfvYkpeGh2dGln0C/SjoDJ0=
+			vduRHADHvdhR1/nXDROsz3Fyc4ykEdcKOMHjfkElM1c=
 			</data>
 		</dict>
 		<key>Headers/GyAuthPrivacyItem.h</key>
