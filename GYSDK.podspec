@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GYSDK"
-  s.version      = "3.1.2.0"
+  s.version      = "3.1.3.0"
   s.summary      = "个验 iOS SDK CocoaPods 集成库"
 
   s.homepage     = "https://docs.getui.com/geyan/"
