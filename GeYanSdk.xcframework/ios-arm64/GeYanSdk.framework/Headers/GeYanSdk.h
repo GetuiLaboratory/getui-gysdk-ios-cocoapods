@@ -5,7 +5,7 @@
 //  Created by ak on 2017/4/21.
 //  Copyright © 2017年 getui. All rights reserved.
 //
-// GySdk-Version: 3.1.4.0
+// GySdk-Version: 3.1.5.0
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -155,6 +155,11 @@ typedef void (^GyVerifyCallback)(NSDictionary *_Nullable verifyDictionary);
 
 
 //MARK: - 本机号码校验
+
+/// 获取当前 App 启动初始化的指定运营商代理商类型。
+/// SDK 未启动、未知或未配置的运营商返回空字符串。
+/// @param type 运营商类型：1-移动、2-联通、3-电信
++ (NSString *_Nonnull)getOperatorAgent:(GyOperatorType)type;
 
 /// 获取本机号码校验所需要的 processID 和 token
 /// @param callback 回调
