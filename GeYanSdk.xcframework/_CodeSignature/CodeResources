@@ -6,11 +6,11 @@
 	<dict>
 		<key>ios-arm64/GeYanSdk.framework/GeYanSdk</key>
 		<data>
-		GSnUusGmPnq7C0uP086lI+0+J/E=
+		4s4A6voEI/UC0/Gzq9e+sKUAAtM=
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/Headers/GeYanSdk.h</key>
 		<data>
-		labIIHO5eaH8AKVvV2vavd7IfUY=
+		wYRikXawEM70Jr+0txql1RqPft0=
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/Headers/GyAuthPrivacyItem.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/Info.plist</key>
 		<data>
-		g2S1t8BXxtQU7K1Ym++PFIzxNm8=
+		ytrvG5OLrRTyGxeKSwFMDvM0oMQ=
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/Modules/module.modulemap</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeDirectory</key>
 		<data>
-		Ic10IvRm5C10zhg/jSYHZFgd6J8=
+		aY5is5HXk3Iwv/yNtIi6EOMe2mc=
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeRequirements</key>
 		<data>
@@ -50,23 +50,23 @@
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeRequirements-1</key>
 		<data>
-		3tz0EycAggVMd1UApHuzWEjg5EQ=
+		mMyGrqTid71oGkmZff02efrj8rg=
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeResources</key>
 		<data>
-		eUTUBEfFTxRg8RSb3XQcz/XVrv4=
+		UWYlom53hoRb9wPfX7JNRQ7v3xI=
 		</data>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeSignature</key>
 		<data>
-		JCyNXY6+mkkUmBsOPde/pmfjRUk=
+		TTFDdHP3DATH+AlIAgUTxJ6mjWA=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/GeYanSdk</key>
 		<data>
-		lBtCzLmY6+EBEM0R5nTV4hfzUXg=
+		w9qPVQ6MHRECylAqD3MPPM/nGss=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Headers/GeYanSdk.h</key>
 		<data>
-		labIIHO5eaH8AKVvV2vavd7IfUY=
+		wYRikXawEM70Jr+0txql1RqPft0=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Headers/GyAuthPrivacyItem.h</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Info.plist</key>
 		<data>
-		S7EajW7buKyjfDegR2frUYGAx2g=
+		LH9fM/9aq9VIb1fPExDGe8kOuB4=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Modules/module.modulemap</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeDirectory</key>
 		<data>
-		dl3tXA61MxN9ImEiHjGBd6+D39o=
+		ahpMXBGNUPEuUKoubTap2YAuk2I=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeRequirements</key>
 		<data>
@@ -106,15 +106,15 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeRequirements-1</key>
 		<data>
-		v0GNNAojtSdYuNPL15YgzzM5PIw=
+		p759qKcE8boTeCQ8VHNNXnUu5yM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeResources</key>
 		<data>
-		XhI7Mu0n9AvkG8rpafElw2GMjec=
+		Xzl2t7uQmCBbChJEh3K4DFTEP8E=
 		</data>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeSignature</key>
 		<data>
-		14R0e9q8o05FveDvSnKO0W8RJ+0=
+		3VJkKFnUX60ccvEPzkJ6jh0Gnr4=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -123,22 +123,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GSnUusGmPnq7C0uP086lI+0+J/E=
+			4s4A6voEI/UC0/Gzq9e+sKUAAtM=
 			</data>
 			<key>hash2</key>
 			<data>
-			yaUp8xf+Z6IJ+io3NcAjkvHAPpDfqi9XA/1kCdlIMv8=
+			GlTv47IMOc8rnbuzrhzmBalESX21mt0k3c5IylCdoVs=
 			</data>
 		</dict>
 		<key>ios-arm64/GeYanSdk.framework/Headers/GeYanSdk.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			labIIHO5eaH8AKVvV2vavd7IfUY=
+			wYRikXawEM70Jr+0txql1RqPft0=
 			</data>
 			<key>hash2</key>
 			<data>
-			rqaxemILY8AeLoyaq/rAh2Jub6UpZOuMHy9bcsOtaKs=
+			A263cQdlH9DkRBqTUOFuttbB0y9jXj+DIoCmniFKsFM=
 			</data>
 		</dict>
 		<key>ios-arm64/GeYanSdk.framework/Headers/GyAuthPrivacyItem.h</key>
@@ -189,11 +189,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			g2S1t8BXxtQU7K1Ym++PFIzxNm8=
+			ytrvG5OLrRTyGxeKSwFMDvM0oMQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			kitNnXoPrDCgz/PFItL4W4T4WvJ6xZUU1rtcUtKG7mQ=
+			XThRN1QQUunNmUqqPPS/SZTol46wA8+tiXpf8MxBFVc=
 			</data>
 		</dict>
 		<key>ios-arm64/GeYanSdk.framework/Modules/module.modulemap</key>
@@ -222,11 +222,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Ic10IvRm5C10zhg/jSYHZFgd6J8=
+			aY5is5HXk3Iwv/yNtIi6EOMe2mc=
 			</data>
 			<key>hash2</key>
 			<data>
-			aPNtePSemiwc+3796lmaaqbZk/Eel32PhE6Bs1J8k7g=
+			kWYKv9lO/QsvPT7a62xlKlQVE4vERmpwgUyeL5OIz48=
 			</data>
 		</dict>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeRequirements</key>
@@ -244,55 +244,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3tz0EycAggVMd1UApHuzWEjg5EQ=
+			mMyGrqTid71oGkmZff02efrj8rg=
 			</data>
 			<key>hash2</key>
 			<data>
-			x9aqWu6hcnvDfiyXhcFt21zAdFWvkMK8ag4FsU+1liY=
+			gfdbau0KgCI4bSzJlBTIBAovufmoGkds01Emir8Puzg=
 			</data>
 		</dict>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eUTUBEfFTxRg8RSb3XQcz/XVrv4=
+			UWYlom53hoRb9wPfX7JNRQ7v3xI=
 			</data>
 			<key>hash2</key>
 			<data>
-			y+PRibjngF9ceVaTi8HQTRxEWWifNa4ytsDZOBEULnA=
+			x1CxWjRDI2RO8JaL7dxf7JyiLmB5yV6QRpxnhwsmL2Y=
 			</data>
 		</dict>
 		<key>ios-arm64/GeYanSdk.framework/_CodeSignature/CodeSignature</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JCyNXY6+mkkUmBsOPde/pmfjRUk=
+			TTFDdHP3DATH+AlIAgUTxJ6mjWA=
 			</data>
 			<key>hash2</key>
 			<data>
-			GU82R7yr1xQnmQ4Njhvvp77AWrAVhk9MsVPJTS6HxaM=
+			tw0KESUV5MDXao7WLstG5Rwu/JDlMPtm2unyZzUPyWI=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/GeYanSdk</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lBtCzLmY6+EBEM0R5nTV4hfzUXg=
+			w9qPVQ6MHRECylAqD3MPPM/nGss=
 			</data>
 			<key>hash2</key>
 			<data>
-			+HheA/t9P14phyppo4eIjWEkuq8GkXO+1IXUmnU/UQk=
+			ODoxMBD5fRui7DxcQjwzgpjY2YeEydfY2QpXyedEKAs=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Headers/GeYanSdk.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			labIIHO5eaH8AKVvV2vavd7IfUY=
+			wYRikXawEM70Jr+0txql1RqPft0=
 			</data>
 			<key>hash2</key>
 			<data>
-			rqaxemILY8AeLoyaq/rAh2Jub6UpZOuMHy9bcsOtaKs=
+			A263cQdlH9DkRBqTUOFuttbB0y9jXj+DIoCmniFKsFM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Headers/GyAuthPrivacyItem.h</key>
@@ -343,11 +343,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			S7EajW7buKyjfDegR2frUYGAx2g=
+			LH9fM/9aq9VIb1fPExDGe8kOuB4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ut6QTun5oCPj0Vw4Vgy7Q6gdNFXZR/2bFl10vkWo5Tc=
+			TJQl+QhYThIkk5hRE/AQB/sms7LrXUKj7A3jFJzpCXY=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/Modules/module.modulemap</key>
@@ -376,11 +376,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dl3tXA61MxN9ImEiHjGBd6+D39o=
+			ahpMXBGNUPEuUKoubTap2YAuk2I=
 			</data>
 			<key>hash2</key>
 			<data>
-			vzdmt3EPJL4+GkTzl8Qsm9frqZdchkMJGT+IJ+LbVM0=
+			3g5CiOQhopkDORTd0xgdch4ifmkV2OxPPU0+N2CqyzU=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeRequirements</key>
@@ -398,33 +398,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			v0GNNAojtSdYuNPL15YgzzM5PIw=
+			p759qKcE8boTeCQ8VHNNXnUu5yM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Uslz0xwFTEyuTiaDxM3gt3hcf8oTxYBU4r8NnX77pxs=
+			UDmuePilBvdftoyepy55K5ByhevtIaHf18XeIGU6zz8=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XhI7Mu0n9AvkG8rpafElw2GMjec=
+			Xzl2t7uQmCBbChJEh3K4DFTEP8E=
 			</data>
 			<key>hash2</key>
 			<data>
-			9PsxybjhcKDtT0dgm/aw2++2CL4NOnO0uiJvrbrC8IU=
+			lWbtaTjE2k3xsIGu31DY8is3VUTg2K/eA5GdBlj2few=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/GeYanSdk.framework/_CodeSignature/CodeSignature</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			14R0e9q8o05FveDvSnKO0W8RJ+0=
+			3VJkKFnUX60ccvEPzkJ6jh0Gnr4=
 			</data>
 			<key>hash2</key>
 			<data>
-			hXFdt048HXkbdK3OANfLbisrlLZaGInIHkNKkqSovmg=
+			vP8Mum0ZaNse8OyTvkE0/qViJEfecmOHdhO+IYNET4w=
 			</data>
 		</dict>
 	</dict>
